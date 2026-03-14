@@ -1,27 +1,15 @@
 #ifndef RING_H
 #define RING_H
 
-template<typename T>
+template<typename T, size_t SizeLog2>
 class RingBuffer {
-private:
 public:
-    T* data;
+    static constexpr size_t capacity = 1UL << SizeLog2;
+    static constexpr size_t mask = capacity - 1;
+    T data[capacity]{};
     size_t head = 0;
-    size_t capacity;
-    size_t mask;
 
-    // size_log2 — логарифм размера буфера по основанию 2
-    // например: 8 → 256 элементов, 10 → 1024 элементов
-    explicit RingBuffer(size_t size_log2) {
-        capacity = 1UL << size_log2;
-        mask = capacity - 1;
-
-        data = new T[capacity];
-    }
-
-    ~RingBuffer() {
-        delete[] data;
-    }
+    constexpr RingBuffer() = default;
 
     void push(const T& value) {
         data[head] = value;
@@ -29,7 +17,13 @@ public:
     }
 
     void flush() {
-        memset(data, 0, sizeof(T) * capacity);
+        for (size_t i = 0; i < capacity; ++i) {
+            data[i] = T{};
+        }
+        head = 0;
+    }
+
+    void rewind() {
         head = 0;
     }
 };

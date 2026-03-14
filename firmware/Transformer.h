@@ -46,25 +46,26 @@ constexpr float divider_factor = R1 / R2 + 1;
 
 // Опорное напряжение и АЦП
 constexpr uint16_t ADC_MAX_BIT = 10;
-constexpr uint16_t VREF_mV = 5000; // 5.00 В в милливольты
-constexpr uint16_t VREF_cV = VREF_mV / 10; // 5.00 В в сантивольты
+constexpr uint16_t VREF_V = 5;
+constexpr uint16_t VREF_cV = VREF_V * 100; // 5 В в сантивольты
 
 ////////////////////////////////////////////////////////////////////////////////
 
 // Пересчёт показаний АЦП в сантивольты на датчике
 constexpr uint16_t adc_to_direct(uint16_t adc) {
-  return (uint16_t)((adc * VREF_cV) >> ADC_MAX_BIT);
+  return (((uint32_t)adc * VREF_cV) >> ADC_MAX_BIT);
 }
 
 // Коэффициент от датчика до входа
 constexpr float probe_to_in_factor = test_to_in_factor * divider_factor / efficiency;
 constexpr uint16_t probe_to_in_factor_full = probe_to_in_factor * VREF_cV;
 
-// Пересчёт АЦП в сантивольты на выходе трансформатора
+// Пересчёт АЦП в сантивольты на входе трансформатора
 constexpr uint16_t adc_to_cV(uint16_t adc) {
   return ((uint32_t)(adc) * probe_to_in_factor_full) >> ADC_MAX_BIT;
 }
 
+// Пересчёт сантивольтов на входе трансформатора в показания АЦП
 constexpr uint16_t cV_to_adc(uint16_t cV) {
   return ((uint32_t)cV << ADC_MAX_BIT) / probe_to_in_factor_full;
 }
@@ -74,10 +75,10 @@ constexpr float rspace = 0.57;
 
 // Границы диапазонов по коэффициентам отвода
 static constexpr Range<float> ranges_kt[4] = {
-  Range<float>(0, spacing(k4, k5, rspace)),
-  Range<float>(spacing(k4, k5, lspace), spacing(k5, k6, rspace)),
-  Range<float>(spacing(k5, k6, lspace), spacing(k6, k7, rspace)),
-  Range<float>(spacing(k6, k7, lspace), 0xFFFF),
+  Range<float>(0, utils::spacing(k4, k5, rspace)),
+  Range<float>(utils::spacing(k4, k5, lspace), utils::spacing(k5, k6, rspace)),
+  Range<float>(utils::spacing(k5, k6, lspace), utils::spacing(k6, k7, rspace)),
+  Range<float>(utils::spacing(k6, k7, lspace), 0xFFFF),
 };
 
 // Границы диапазонов в сантивольтах (те же выражения, что в spacing_kt)
