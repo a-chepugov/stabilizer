@@ -2,7 +2,7 @@
 #define TRANSFORMER_H
 
 #include "Range.h"
-#include "Utils.h"
+#include "utils.h"
 
 // Коэффициенты преобразования трансформатора (отводы)
 constexpr uint16_t k7 = 100;
@@ -51,12 +51,12 @@ constexpr uint16_t VREF_cV = VREF_mV / 10; // 5.00 В в сантивольты
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// Пересчёт показаний АЦП в милливольты на датчике
+// Пересчёт показаний АЦП в сантивольты на датчике
 constexpr uint16_t adc_to_direct(uint16_t adc) {
   return (uint16_t)((adc * VREF_cV) >> ADC_MAX_BIT);
 }
 
-// Коэффициент пересчёта от входа до датчика
+// Коэффициент от датчика до входа
 constexpr float probe_to_in_factor = test_to_in_factor * divider_factor / efficiency;
 constexpr uint16_t probe_to_in_factor_full = probe_to_in_factor * VREF_cV;
 
@@ -96,4 +96,4 @@ static constexpr Range<uint16_t> ranges_adc[4] = {
   ranges_cV[3].map<uint16_t>(cV_to_adc),
 };
 
-#endif // TRANSFORMER_H
+#endif

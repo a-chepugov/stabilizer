@@ -1,8 +1,5 @@
 #define TEST 1
-
-#include "data.h"
-#include "cycle.h"
-#include "Transformer.h"
+#include "Periods.h"
 
 constexpr uint8_t Rel5 = 5;
 constexpr uint8_t Rel6 = 6;
@@ -21,42 +18,36 @@ void setup() {
   digitalWrite(Rel8, LOW);
 
   Serial.begin(9600);
+  Serial.println("\n===");
 
-  Serial.println("\n====");
-   Serial.print("test_to_in_factor: ");
-   Serial.println(test_to_in_factor);
+//   Serial.print("test_to_in_factor: ");
+//   Serial.println(test_to_in_factor);
 
-   Serial.print("diode_drop_cV: ");
-   Serial.println(diode_drop_cV);
+//   Serial.print("diode_drop_cV: ");
+//   Serial.println(diode_drop_cV);
 
-   Serial.print("divider_factor: ");
-   Serial.println(divider_factor);
+//   Serial.print("divider_factor: ");
+//   Serial.println(divider_factor);
 
-   Serial.print("probe_to_in_factor: ");
-   Serial.println(probe_to_in_factor);
+//   Serial.print("probe_to_in_factor: ");
+//   Serial.println(probe_to_in_factor);
 
-   Serial.print("probe_to_in_factor_full: ");
-   Serial.println(probe_to_in_factor_full);
+//   Serial.print("probe_to_in_factor_full: ");
+//   Serial.println(probe_to_in_factor_full);
 
    Serial.println("***");
    
-   for(size_t i = 0; i < 4; i++) {
-      Serial.print(ranges_adc[i].lo);
-      Serial.print(' ');
-      Serial.print(ranges_adc[i].hi);
-      Serial.println(' ');
-   }
+//   for(size_t i = 0; i < 4; i++) {
+//      Serial.print(ranges_adc[i].lo);
+//      Serial.print(' ');
+//      Serial.print(ranges_adc[i].hi);
+//      Serial.println(' ');
+//   }
 
    Serial.println("***");
 
-
-   Serial.println("++++");    
+   Serial.println("+++");    
 }
-
-char buf[80];
-
-uint16_t it = 0;
-
 
 // TODO вставить учет падения напряжения на диоде при кассчете коэффициента преобразования
 // TODO определить точку смены цикла
@@ -65,17 +56,6 @@ uint16_t it = 0;
 
 
 void loop() {
-  sprintf(buf, "%3d|", it);
-  Serial.print(buf);
- 
   uint16_t A0 = analogRead(A0);
-  if (A0 > 0) {
-    data_push(A0); 
-    if (set_and_tick(A0)) { it++; }
-  }
-
-  uint16_t rms = data_rms();
-
-  sprintf(buf, "r: A0=%4d, rms=%4d | p: A0=%3d, rms=%4d  | V: A0=%3d, rms=%4d", A0, rms, adc_to_direct(A0), adc_to_direct(rms), adc_to_cV(A0), adc_to_cV(rms) / 100);
-  Serial.println(buf);
+  action(A0);
 }
