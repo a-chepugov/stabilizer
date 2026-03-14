@@ -23,12 +23,20 @@ void setup() {
   Serial.begin(9600);
 
   Serial.println("\n====");
-   Serial.print("divider_factor: ");
-   Serial.println(divider_factor);
+   Serial.print("test_to_in_factor: ");
+   Serial.println(test_to_in_factor);
+
    Serial.print("diode_drop_cV: ");
    Serial.println(diode_drop_cV);
-   Serial.print("factor_k2_to_k5: ");
-   Serial.println(factor_k2_to_k5);
+
+   Serial.print("divider_factor: ");
+   Serial.println(divider_factor);
+
+   Serial.print("probe_to_in_factor: ");
+   Serial.println(probe_to_in_factor);
+
+   Serial.print("probe_to_in_factor_full: ");
+   Serial.println(probe_to_in_factor_full);
 
    Serial.println("***");
    
@@ -59,10 +67,7 @@ uint16_t it = 0;
 void loop() {
   sprintf(buf, "%3d|", it);
   Serial.print(buf);
-
-  digitalWrite(Rel5, HIGH);
-  digitalWrite(Rel8, HIGH);
-  
+ 
   uint16_t A0 = analogRead(A0);
   if (A0 > 0) {
     data_push(A0); 
@@ -71,6 +76,6 @@ void loop() {
 
   uint16_t rms = data_rms();
 
-  sprintf(buf, "A0=%4d, rms=%4d | mV: A0=%3d, rms=%4d  | V: A0=%3d, rms=%4d", A0, rms, adc_to_direct(A0), adc_to_direct(rms), adc_to_cV(A0), adc_to_cV(rms) / 100);
+  sprintf(buf, "r: A0=%4d, rms=%4d | p: A0=%3d, rms=%4d  | V: A0=%3d, rms=%4d", A0, rms, adc_to_direct(A0), adc_to_direct(rms), adc_to_cV(A0), adc_to_cV(rms) / 100);
   Serial.println(buf);
 }
