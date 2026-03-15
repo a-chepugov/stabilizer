@@ -45,7 +45,10 @@ constexpr float R2 = 10000;
 constexpr float divider_factor = R1 / R2 + 1;
 
 // Опорное напряжение и АЦП
-constexpr uint16_t ADC_MAX_BIT = 10;
+constexpr uint16_t ADC_BITS = 10;
+constexpr uint16_t ADC_LEVELS = 1UL << ADC_BITS;
+constexpr uint16_t ADC_MAX_VALUE = ADC_LEVELS - 1;
+
 constexpr uint16_t VREF_V = 5;
 constexpr uint16_t VREF_cV = VREF_V * 100; // 5 В в сантивольты
 
@@ -53,7 +56,7 @@ constexpr uint16_t VREF_cV = VREF_V * 100; // 5 В в сантивольты
 
 // Пересчёт показаний АЦП в сантивольты на датчике
 constexpr uint16_t adc_to_direct(uint16_t adc) {
-  return (((uint32_t)adc * VREF_cV) >> ADC_MAX_BIT);
+  return (((uint32_t)adc * VREF_cV) >> ADC_BITS);
 }
 
 // Коэффициент от датчика до входа
@@ -62,12 +65,12 @@ constexpr uint16_t probe_to_in_factor_full = probe_to_in_factor * VREF_cV;
 
 // Пересчёт АЦП в сантивольты на входе трансформатора
 constexpr uint16_t adc_to_cV(uint16_t adc) {
-  return ((uint32_t)(adc) * probe_to_in_factor_full) >> ADC_MAX_BIT;
+  return ((uint32_t)(adc) * probe_to_in_factor_full) >> ADC_BITS;
 }
 
 // Пересчёт сантивольтов на входе трансформатора в показания АЦП
 constexpr uint16_t cV_to_adc(uint16_t cV) {
-  return ((uint32_t)cV << ADC_MAX_BIT) / probe_to_in_factor_full;
+  return ((uint32_t)cV << ADC_BITS) / probe_to_in_factor_full;
 }
 
 constexpr float lspace = 0.43;
