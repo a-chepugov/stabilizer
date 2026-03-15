@@ -46,7 +46,9 @@ void setup() {
 
    Serial.println("***");
 
-   Serial.println("+++");    
+   Serial.println("+++");
+   __setup();
+
 }
 
 // TODO вставить учет падения напряжения на диоде при кассчете коэффициента преобразования
@@ -60,6 +62,7 @@ void setup() {
 
 
 void loop() {
+//  Serial.print(".");
   uint16_t A0 = analogRead(A0);
-  action(A0);
+  __loop(A0);
 }
