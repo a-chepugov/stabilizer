@@ -4,8 +4,8 @@
  template<typename T>
  class Range {
  public:
-     const T lo;  // только чтение
-     const T hi;  // только чтение
+     const T lo;
+     const T hi;
  
      constexpr Range(T lo, T hi)
        : lo(lo), hi(hi) {}
