@@ -1,0 +1,18 @@
+CompileFlags:
+  Add:
+    # Путь к ядру Arduino
+    - "-I/home/alex/local/opt/arduino-1.8.19/hardware/arduino/avr/cores/arduino"
+    - "-I/nix/store/y28c83zz73yr4vwz1fsl4nsrn6yz5fj0-gcc-14.3.0/include/c++/14.3.0"
+
+    # Пути к библиотекам Arduino (пример)
+    - "-I/home/alex/local/opt/arduino-1.8.19/libraries/Servo"
+    - "-I/home/alex/local/opt/arduino-1.8.19/libraries/Wire"
+    - "-I/home/alex/local/opt/arduino-1.8.19/libraries/EEPROM"
+
+    # Флаги компилятора для AVR
+    - "-mmcu=atmega328p"      # плата Arduino Uno / Nano
+    - "-DF_CPU=16000000UL"    # частота MCU
+
+    # оптимизации и предупреждения
+    - "-Os"                   # оптимизация под размер
+    - "-Wall"                 # включить все предупреждения
