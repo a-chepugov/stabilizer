@@ -9,7 +9,13 @@ public:
     uint16_t mid = 0;    
 
     boolean tick(uint16_t now) {
-        if (old < mid && mid > now) {
+        if (
+            // вариант для непрерывного замера, но не работает при дискретных замерах
+            // (old < mid && mid > now)
+            
+            (old <= mid && mid > now) ||
+            (old < mid && mid >= now)
+        ) {
             old = mid;
             mid = now;
             ticks++;
