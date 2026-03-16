@@ -1,5 +1,5 @@
 #define TEST 1
-#include "main.h"
+#include "main.hpp"
 
 // TODO состояния:
 // - диапазоны датчика 

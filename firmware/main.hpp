@@ -1,8 +1,8 @@
 #include "Arduino.h"
-#include "Transformer.h"
+#include "Transformer.hpp"
 
-#include "Periods.h"
-#include "State.h"
+#include "Periods.hpp"
+#include "State.hpp"
 
 constexpr uint8_t Relay5 = 5;
 constexpr uint8_t Relay6 = 6;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Range.h"
-#include "utils.h"
+#include "Range.hpp"
+#include "utils.hpp"
 
 // Коэффициенты преобразования трансформатора (отводы)
 constexpr uint16_t k7 = 100;
