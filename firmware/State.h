@@ -25,19 +25,4 @@ public:
     }
 };
 
-void reset1() {
-    Serial.println("state 1");
-}
-
-void reset2() {
-    Serial.println("state 2");
-}
-
-State<int> state1(1, 2, reset1);
-State<int> state2(3, 4, reset2);
-
-inline void link() {
-    state2.below = &state1;
-};
-
 #endif
