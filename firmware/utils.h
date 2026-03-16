@@ -1,5 +1,4 @@
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
 namespace utils {
     // Линейная интерполяция положения точки как процент от длины AB (0..1)
@@ -16,5 +15,3 @@ namespace utils {
     }
 
 }
-
-#endif

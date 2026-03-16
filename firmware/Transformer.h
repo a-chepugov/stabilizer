@@ -1,5 +1,4 @@
-#ifndef TRANSFORMER_H
-#define TRANSFORMER_H
+#pragma once
 
 #include "Range.h"
 #include "utils.h"
@@ -100,5 +99,3 @@ static constexpr Range<uint16_t> ranges_adc[4] = {
   ranges_cV[2].map<uint16_t>(cV_to_adc),
   ranges_cV[3].map<uint16_t>(cV_to_adc),
 };
-
-#endif

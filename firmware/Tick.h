@@ -1,5 +1,4 @@
-#ifndef TICK_H
-#define TICK_H
+#pragma once
 
 class Tick {
 public:
@@ -27,5 +26,3 @@ public:
         }
     }
 };
-
-#endif

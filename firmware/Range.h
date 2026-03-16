@@ -1,5 +1,4 @@
- #ifndef RANGE_H
- #define RANGE_H
+#pragma once
 
  template<typename T>
  class Range {
@@ -23,6 +22,3 @@
        return Range<T2>(f(lo), f(hi));
      }
  };
-
- #endif // RANGE_H
-

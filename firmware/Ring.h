@@ -1,5 +1,4 @@
-#ifndef RING_H
-#define RING_H
+#pragma once
 
 template<typename T, size_t SizeLog2>
 class RingBuffer {
@@ -27,5 +26,3 @@ public:
         head = 0;
     }
 };
-
-#endif

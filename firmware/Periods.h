@@ -1,5 +1,4 @@
-#ifndef PERIODS_H
-#define PERIODS_H
+#pragma once
 
 #include "Ring.h"
 #include "Tick.h"
@@ -48,5 +47,3 @@ public:
         }
     }
 };
-
-#endif

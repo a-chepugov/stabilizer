@@ -1,5 +1,4 @@
-#ifndef STATE_H
-#define STATE_H
+#pragma once
 
 template<typename T>
 class State {
@@ -24,5 +23,3 @@ public:
         return 0;
     }
 };
-
-#endif
