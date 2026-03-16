@@ -1,21 +1,50 @@
 #define TEST 1
-#include "Periods.h"
+#include "main.h"
 
-constexpr uint8_t Rel5 = 5;
-constexpr uint8_t Rel6 = 6;
-constexpr uint8_t Rel7 = 7;
-constexpr uint8_t Rel8 = 8;
+constexpr uint8_t Relay5 = 5;
+constexpr uint8_t Relay6 = 6;
+constexpr uint8_t Relay7 = 7;
+constexpr uint8_t Relay8 = 8;
+
+void connect_to_5() {
+  digitalWrite(Relay5, LOW);
+  digitalWrite(Relay6, LOW);
+  digitalWrite(Relay7, LOW);
+  digitalWrite(Relay8, HIGH);
+}
+
+void connect_to_6() {
+  digitalWrite(Relay5, HIGH);
+  digitalWrite(Relay6, LOW);
+  digitalWrite(Relay7, LOW);
+  digitalWrite(Relay8, HIGH);
+}
+
+void connect_to_7() {
+  digitalWrite(Relay5, HIGH);
+  digitalWrite(Relay6, HIGH);
+  digitalWrite(Relay7, LOW);
+  digitalWrite(Relay8, HIGH);
+}
+
+void connect_to_4() {
+  digitalWrite(Relay5, HIGH);
+  digitalWrite(Relay6, HIGH);
+  digitalWrite(Relay7, HIGH);
+  digitalWrite(Relay8, HIGH);
+}
+
+void disconnect() {
+  digitalWrite(Relay8, LOW);
+}
 
 void setup() {
-  pinMode(Rel5, OUTPUT); 
-  pinMode(Rel6, OUTPUT); 
-  pinMode(Rel7, OUTPUT); 
-  pinMode(Rel8, OUTPUT); 
+  pinMode(Relay5, OUTPUT); 
+  pinMode(Relay6, OUTPUT); 
+  pinMode(Relay7, OUTPUT); 
+  pinMode(Relay8, OUTPUT); 
 
-  digitalWrite(Rel5, LOW);
-  digitalWrite(Rel6, LOW);
-  digitalWrite(Rel7, LOW);
-  digitalWrite(Rel8, LOW);
+  disconnect();
 
   Serial.begin(9600);
   Serial.println("\n===");
@@ -32,9 +61,6 @@ void setup() {
 //   Serial.print("probe_to_in_factor: ");
 //   Serial.println(probe_to_in_factor);
 
-//   Serial.print("probe_to_in_factor_full: ");
-//   Serial.println(probe_to_in_factor_full);
-
 //   Serial.println("***");
    
 //   for(size_t i = 0; i < 4; i++) {
@@ -45,21 +71,18 @@ void setup() {
 //   }
 
    Serial.println("***");
-
    Serial.println("+++");
    __setup();
 
 }
 
-// TODO вставить учет падения напряжения на диоде при кассчете коэффициента преобразования
-// TODO разрешать переключение не раньше, чем N циклов предыдущего переключения (для стабилизации RMS)
 // TODO состояния:
 // - диапазоны датчика 
 // - проверки вхожения значения в диапазон (-1/0/1) )
 // - настройки состояний реле
 // - ссылки на соседние состояния
 // TODO переменная указывающая на текущее состояние
-
+// TODO разрешать переключение не раньше, чем N циклов предыдущего переключения (для стабилизации RMS)
 
 void loop() {
 //  Serial.print(".");

@@ -5,9 +5,7 @@
 #include "Tick.h"
 #include "Period.h"
 #include "utils.h"
-#include "Transformer.h"
 
-#include "State.h"
 
 constexpr uint8_t RING_SIZE_LOG2 = 8;
 constexpr uint16_t RING_SIZE = 1UL << RING_SIZE_LOG2;
@@ -41,9 +39,8 @@ public:
 
                 periods.push(Period(duration, rms));
 
-                sprintf(buffer, "\n%3d : pr=%3d >> raw=%4d | d=%3d | V=%3d", ticks, raw.head, rms, adc_to_direct(rms), adc_to_cV(rms) / 100);
+                sprintf(buffer, "\n%3d : pr=%3d >> raw=%4d | d=%3d | V=%3d", ticks, raw.head, rms, adc_to_direct(rms), adc_to_cV(rms));
                 Serial.println(buffer);
-
 
                 raw.rewind();
             };
@@ -51,22 +48,5 @@ public:
         }
     }
 };
-
-Periods periods;
-
-inline void __setup() {
-    link();
-    state2.apply();
-    Serial.print("DELAY_MCS:");
-    Serial.println(DELAY_MCS);
-
-    // Serial.println(square_table[10]); // 100
-    // Serial.println(square_table[1023]); // 1046529
-}
-
-inline void __loop(uint16_t A0) {
-    periods.push(A0);
-    delayMicroseconds(DELAY_MCS);
-}
 
 #endif
