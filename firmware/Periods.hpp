@@ -4,6 +4,7 @@
 #include "Tick.hpp"
 #include "Period.hpp"
 #include "utils.hpp"
+#include "Transformer.hpp"
 
 constexpr uint8_t RING_SIZE_LOG2 = 8;
 constexpr uint16_t RING_SIZE = 1UL << RING_SIZE_LOG2;
