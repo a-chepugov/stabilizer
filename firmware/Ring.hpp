@@ -5,10 +5,14 @@ class RingBuffer {
 public:
     static constexpr size_t capacity = 1UL << SizeLog2;
     static constexpr size_t mask = capacity - 1;
-    T data[capacity]{};
+
+    T data[capacity]{};   
     size_t head = 0;
 
     constexpr RingBuffer() = default;
+
+    constexpr T& operator[](size_t i) { return data[i]; }
+    const constexpr T& operator[](size_t i) const { return data[i]; }
 
     void push(const T& value) {
         data[head] = value;
