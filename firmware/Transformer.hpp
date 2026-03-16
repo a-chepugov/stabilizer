@@ -1,29 +1,36 @@
 #pragma once
 
 // Коэффициенты преобразования трансформатора (отводы)
-constexpr uint16_t k7 = 100;
-constexpr uint16_t k6 = 90;
-constexpr uint16_t k5 = 80;
-constexpr uint16_t k4 = 65;
-constexpr uint16_t k3 = 11;
-constexpr uint16_t k2 = 10;
-constexpr uint16_t k1 = 5;
+constexpr uint16_t k_7 = 100;
+constexpr uint16_t k_6 = 90;
+constexpr uint16_t k_5 = 80;
+constexpr uint16_t k_4 = 65;
+constexpr uint16_t k_3 = 11;
+constexpr uint16_t k_2 = 10;
+constexpr uint16_t k_1 = 5;
 
-// коэффициент входного напряжения
-constexpr uint16_t input_k = k5;
-// коэффициент для замера
-constexpr uint16_t test_k = k1;
+// Коэффициент входного напряжения
+constexpr uint16_t input_k = k_5;
+// Коэффициент для замера
+constexpr uint16_t test_k = k_1;
 
-constexpr uint16_t target_rms_V = 230;  // amp 325
-constexpr uint16_t target_rms_V_min = 150;  // amp 212
+constexpr uint16_t target_rms_V = 220;  // amp 311
+constexpr uint16_t target_rms_V_min = 155;  // amp 219
 constexpr uint16_t target_rms_V_max = 315;  // amp 445
 
 constexpr uint16_t target_rms_cV = target_rms_V * 100; // 230.00 В в сантивольтах
 
-// коэффициент трансформации для любого выхода
-constexpr float get_trans_factor(float k) {
-  return k * target_rms_cV / input_k;
+// Напряжение на входе для получения целевого на выходе
+constexpr float get_input_cV(float k) {
+  return (float)target_rms_cV * input_k / k;
 }
+
+constexpr float get_trans_koef(float cV) {
+  return (float)target_rms_cV * input_k / cV;
+}
+
+constexpr uint16_t k_crit_min = get_trans_koef(target_rms_V_max * 100);
+constexpr uint16_t k_crit_max = get_trans_koef(target_rms_V_min * 100);
 
 constexpr float test_to_in_factor = input_k / test_k;
 constexpr uint16_t i_test_to_in_factor = test_to_in_factor;
@@ -33,7 +40,7 @@ constexpr float diode_drop = 0.613127;
 constexpr uint16_t diode_drop_cV = diode_drop * 100;
 
 // Характеристики делителm напряжения
-constexpr float R1 = 42000;
+constexpr float R1 = 50000;
 constexpr float R2 = 10000;
 
 constexpr float divider_factor = R1 / R2 + 1;
@@ -67,5 +74,9 @@ constexpr uint16_t adc_to_cV(uint16_t adc) {
 
 // Пересчёт сантивольтов на входе трансформатора в показания АЦП
 constexpr uint16_t cV_to_adc(uint16_t cV) {
-  return ((uint32_t)(cV / i_test_to_in_factor - diode_drop_cV) << ADC_BITS) / probe_to_divider_factor;
+  return (
+    (uint32_t)(
+      cV / i_test_to_in_factor - diode_drop_cV
+    ) << ADC_BITS
+  ) / probe_to_divider_factor;
 }
