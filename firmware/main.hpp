@@ -4,6 +4,9 @@
 #include "Periods.hpp"
 #include "State.hpp"
 
+#include "Range.hpp"
+#include "utils.hpp"
+
 constexpr uint8_t Relay5 = 5;
 constexpr uint8_t Relay6 = 6;
 constexpr uint8_t Relay7 = 7;
@@ -40,6 +43,34 @@ void connect_to_4() {
 void disconnect() {
   digitalWrite(Relay8, LOW);
 }
+
+constexpr float lspace = 0.43;
+constexpr float rspace = 0.57;
+
+// Границы диапазонов по коэффициентам отвода
+static constexpr Range<float> ranges_kt[4] = {
+  Range<float>(0, utils::spacing(k4, k5, rspace)),
+  Range<float>(utils::spacing(k4, k5, lspace), utils::spacing(k5, k6, rspace)),
+  Range<float>(utils::spacing(k5, k6, lspace), utils::spacing(k6, k7, rspace)),
+  Range<float>(utils::spacing(k6, k7, lspace), 0xFFFF),
+};
+
+// Границы диапазонов в сантивольтах (те же выражения, что в spacing_kt)
+static constexpr Range<float> ranges_cV[4] = {
+  ranges_kt[0].map<float>(get_trans_factor),
+  ranges_kt[1].map<float>(get_trans_factor),
+  ranges_kt[2].map<float>(get_trans_factor),
+  ranges_kt[3].map<float>(get_trans_factor),
+};
+
+// Границы диапазонов в единицах АЦП
+static constexpr Range<uint16_t> ranges_adc[4] = {
+  ranges_cV[0].map<uint16_t>(cV_to_adc),
+  ranges_cV[1].map<uint16_t>(cV_to_adc),
+  ranges_cV[2].map<uint16_t>(cV_to_adc),
+  ranges_cV[3].map<uint16_t>(cV_to_adc),
+};
+
 
 State<int> state_crit_lo(3, 4, disconnect);
 
