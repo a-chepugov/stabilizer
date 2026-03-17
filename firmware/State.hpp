@@ -11,13 +11,13 @@ public:
 
     typedef void (*func)();
 
-    func apply = nullptr;
+    func apply;
     
     constexpr State(
-        T lo, T hi, func apply = nullptr
+        T lo, T hi, func apply
     ): lo(lo), hi(hi), apply(apply) {}
 
-    inline uint8_t check(T value) const {
+    int8_t check(T value) const {
         if (value < lo) return -1;
         if (value > hi) return 1;
         return 0;

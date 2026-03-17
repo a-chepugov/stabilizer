@@ -9,7 +9,7 @@ namespace cfg {
   constexpr float lpart = 0.5 - shift;
   constexpr float rpart = 0.5 + shift;
 
-  struct TLineCfg { uint16_t l; uint16_t r; float part; };
+  struct TLineCfg { uint16_t a; uint16_t b; float part; };
 
   constexpr TLineCfg t_min = { k_crit_min, k_4, 0 + shift };
   constexpr TLineCfg t_4_l = { k_crit_min, k_4, 0 };
@@ -36,7 +36,7 @@ namespace cfg {
   }};
 
   constexpr float place (TLineCfg cfg) { 
-    return utils::spacing(cfg.l, cfg.r, cfg.part); 
+    return utils::spacing(cfg.a, cfg.b, cfg.part); 
   };
 
   // "Границы" диапазонов по коэффициентам отвода
