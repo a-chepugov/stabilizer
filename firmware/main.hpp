@@ -13,12 +13,15 @@ constexpr uint8_t Relay6 = 6;
 constexpr uint8_t Relay7 = 7;
 constexpr uint8_t Relay8 = 8;
 
+int status;
+
 void connect_to_4() {
   digitalWrite(Relay5, HIGH);
   digitalWrite(Relay6, HIGH);
   digitalWrite(Relay7, HIGH);
   digitalWrite(Relay8, HIGH);
   Serial.println("state 4");
+  status = 4;
 }
 
 void connect_to_5() {
@@ -27,6 +30,7 @@ void connect_to_5() {
   digitalWrite(Relay7, LOW);
   digitalWrite(Relay8, HIGH);
   Serial.println("state 5");
+  status = 5;
 }
 
 void connect_to_6() {
@@ -35,6 +39,7 @@ void connect_to_6() {
   digitalWrite(Relay7, LOW);
   digitalWrite(Relay8, HIGH);
   Serial.println("state 6");
+  status = 6;
 }
 
 void connect_to_7() {
@@ -43,11 +48,13 @@ void connect_to_7() {
   digitalWrite(Relay7, LOW);
   digitalWrite(Relay8, HIGH);
   Serial.println("state 7");
+  status = 7;
 }
 
 void disconnect() {
   digitalWrite(Relay8, LOW);
   Serial.println("disconnect");
+  status = 0;
 }
 
 State<uint16_t> state_crit_hi{ cfg::adc_ranges[0], 0xFFFF, disconnect };
@@ -85,7 +92,8 @@ void setup() {
   pinMode(Relay7, OUTPUT);
   pinMode(Relay8, OUTPUT);
 
-    // disconnect();
+  link();
+  current_state->apply();
 
   Serial.begin(9600);
   Serial.println("\n===");
@@ -158,9 +166,6 @@ void setup() {
 //   }
 
    Serial.println("+++");
-
-   link();
-   current_state->apply();
 }
 
 Periods periods{};
@@ -188,17 +193,17 @@ void loop() {
     size_t head = periods.adc.head;
     if (periods.push(A0)) {
         uint16_t rms = avg();
-        int8_t status = current_state->check(rms);
-        if (status == 1) {
+        int8_t status_check = current_state->check(rms);
+        if (status_check == 1) {
           current_state = current_state->above;
           current_state->apply();
-        } else if (status == -1) {
+        } else if (status_check == -1) {
           current_state = current_state->below;
           current_state->apply();
         }
 
         // sprintf(buffer, "t%3d : h %4d > pin=%4d | d=%3d | V=%3d", periods.ticks, head, rms, adc_to_direct(rms), adc_to_cV(rms));
-        sprintf(buffer, "t%3d: h %4d > r=%4d | V=%3d (s=%2d)", periods.ticks, head, rms, tr::adc_to_cV(rms), status);
+        sprintf(buffer, "t:%3d |h:%3d > r:%4d | V:%3d (s:%1d|%2d)", periods.ticks, head, rms, tr::adc_to_cV(rms), status, status_check);
         Serial.println(buffer);
     }
   }
