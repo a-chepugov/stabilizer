@@ -1,4 +1,6 @@
 #pragma once
+#include <stdint.h>
+#include <stddef.h>
 
 namespace utils {
     // Линейная интерполяция положения точки как процент от длины AB (0..1)

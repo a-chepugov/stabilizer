@@ -1,4 +1,5 @@
 #pragma once
+#include <stdint.h>
 
 #include "Transformer.hpp"
 #include "utils.hpp"
@@ -22,7 +23,7 @@ namespace cfg {
   constexpr TLineCfg t_7_h = { k_7, k_crit_max, 1 };
   constexpr TLineCfg t_max = { k_7, k_crit_max, 1 - shift };
 
-  constexpr ConstArray<TLineCfg, 10> t_k_tuples = {{
+  constexpr ConstArray<TLineCfg, 10> t_k_tuples{{
     t_min,
     t_4_l,
     t_4_h,
@@ -35,13 +36,13 @@ namespace cfg {
     t_max,
   }};
 
-  constexpr float place (TLineCfg cfg) { 
-    return utils::spacing(cfg.a, cfg.b, cfg.part); 
+  constexpr float place(TLineCfg cfg) {
+    return utils::spacing(cfg.a, cfg.b, cfg.part);
   };
 
   // "Границы" диапазонов по коэффициентам отвода
   constexpr ConstArray<float, 10>t_k_ranges = t_k_tuples.map<float>(place);
-  
+
   // Границы диапазонов в сантивольтах
   constexpr ConstArray<float, 10>cV_ranges = t_k_ranges.map<float>(get_input_cV);
 

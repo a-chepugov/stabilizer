@@ -9,7 +9,7 @@
 constexpr uint8_t RING_SIZE_LOG2 = 8;
 constexpr uint16_t PROBE_DATA_SIZE = 1UL << RING_SIZE_LOG2;
 
-constexpr uint8_t RECORDS_SIZE_LOG2 = 5;
+constexpr uint8_t RECORDS_SIZE_LOG2 = 4;
 constexpr uint16_t RECORDS_DATA_SIZE = 1UL << RECORDS_SIZE_LOG2;
 
 constexpr float FREQUENCY = 50;
@@ -32,7 +32,7 @@ public:
 
     uint32_t timestamp = 0;
 
-    constexpr Periods() {}
+    constexpr Periods(): timestamp(0) {}
 
     bool push(uint16_t value) {
         bool t = tick(value);

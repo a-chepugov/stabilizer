@@ -18,6 +18,15 @@ constexpr uint16_t target_rms_V = 220;  // amp 311
 constexpr uint16_t target_rms_V_min = 155;  // amp 219
 constexpr uint16_t target_rms_V_max = 315;  // amp 445
 
+/**
+| # |   k | rms | amp | rms|t |
+| - | --- | --- | --- | ----- |
+| 7 | 100 | 176 | 249 |   354 | 
+| 6 |  90 | 195 | 276 |   394 |
+| 5 |  80 | 220 | 311 |   448 |
+| 4 |  65 | 270 | 382 |   554 |
+*/
+
 constexpr uint16_t target_rms_cV = target_rms_V * 100; // 230.00 В в сантивольтах
 
 // Напряжение на входе для получения целевого на выходе
