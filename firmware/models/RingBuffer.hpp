@@ -1,4 +1,5 @@
 #pragma once
+#include <stddef.h>
 
 template<typename T, size_t SizeLog2>
 class RingBuffer {
@@ -6,7 +7,7 @@ public:
     static constexpr size_t capacity = 1UL << SizeLog2;
     static constexpr size_t mask = capacity - 1;
 
-    T data[capacity]{};   
+    T data[capacity]{};
     size_t head = 0;
 
     constexpr RingBuffer() = default;

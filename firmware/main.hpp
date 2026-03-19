@@ -2,11 +2,11 @@
 #include <Arduino.h>
 #include <HardwareSerial.h>
 
+#include "cfg/cfg.hpp"
+#include "cfg/Transformer.hpp"
 
-#include "cfg.hpp"
-
-#include "Periods.hpp"
-#include "State.hpp"
+#include "models/Periods.hpp"
+#include "models/State.hpp"
 
 constexpr uint8_t Relay5 = 5;
 constexpr uint8_t Relay6 = 6;
@@ -198,7 +198,7 @@ void loop() {
         }
 
         // sprintf(buffer, "t%3d : h %4d > pin=%4d | d=%3d | V=%3d", periods.ticks, head, rms, adc_to_direct(rms), adc_to_cV(rms));
-        sprintf(buffer, "t%3d: h %4d > r=%4d | V=%3d (s=%2d)", periods.ticks, head, rms, adc_to_cV(rms), status);
+        sprintf(buffer, "t%3d: h %4d > r=%4d | V=%3d (s=%2d)", periods.ticks, head, rms, tr::adc_to_cV(rms), status);
         Serial.println(buffer);
     }
   }
