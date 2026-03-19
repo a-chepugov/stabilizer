@@ -185,7 +185,7 @@ void loop() {
   // Serial.print(".");
   uint16_t A0 = analogRead(A0);
   if (A0 > 0) {
-    size_t head = periods.raw.head;
+    size_t head = periods.adc.head;
     if (periods.push(A0)) {
         uint16_t rms = avg();
         int8_t status = current_state->check(rms);

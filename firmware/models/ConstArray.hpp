@@ -1,4 +1,5 @@
 #pragma once
+#include <stddef.h>
 
 template<typename T, size_t N>
 struct ConstArray
@@ -20,11 +21,11 @@ struct ConstArray
     template<typename T2, typename F>
     constexpr ConstArray<T2, N>map(F func) {
         ConstArray<T2, N> result{};
-        
-        for (size_t i = 0; i < this->length; ++i) {          
+
+        for (size_t i = 0; i < this->length; ++i) {
             result[i] = func(data[i]);
         }
-    
+
         return result;
     }
 };

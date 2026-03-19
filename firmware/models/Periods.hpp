@@ -25,7 +25,7 @@ private:
     }
 
 public:
-    RingBuffer<uint32_t, RING_SIZE_LOG2> raw;
+    RingBuffer<uint32_t, RING_SIZE_LOG2> adc;
     RingBuffer<Period, RECORDS_SIZE_LOG2> records;
 
     uint32_t timestamp = 0;
@@ -45,18 +45,16 @@ public:
             uint16_t duration = now - timestamp;
             timestamp = now;
 
-            uint16_t rms = Periods::rms(raw.data, raw.head);
+            uint16_t rms = Periods::rms(adc.data, adc.head);
 
             records.push(Period(duration, rms));
 
-
-
-            raw.rewind();
-            raw.push(data);
+            adc.rewind();
+            adc.push(data);
             // raw.push(value);
             return true;
         } else {
-            raw.push(data);
+            adc.push(data);
             // raw.push(value);
             return false;
         }
