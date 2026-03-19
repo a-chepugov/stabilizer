@@ -1,13 +1,16 @@
 CompileFlags:
   Add:
-    # Путь к ядру Arduino
-    - "-I/home/alex/local/opt/arduino-1.8.19/hardware/arduino/avr/cores/arduino"
     - "-I/nix/store/y28c83zz73yr4vwz1fsl4nsrn6yz5fj0-gcc-14.3.0/include/c++/14.3.0"
+    - "-I/nix/store/y28c83zz73yr4vwz1fsl4nsrn6yz5fj0-gcc-14.3.0/lib/gcc/x86_64-unknown-linux-gnu/14.3.0/include"
+
+    # Путь к ядру Arduino
+    - "-I/home/alex/.arduino15/packages/arduino/hardware/avr/1.8.7/cores/arduino"
 
     # Пути к библиотекам Arduino (пример)
-    - "-I/home/alex/local/opt/arduino-1.8.19/libraries/Servo"
-    - "-I/home/alex/local/opt/arduino-1.8.19/libraries/Wire"
-    - "-I/home/alex/local/opt/arduino-1.8.19/libraries/EEPROM"
+    - "-I/home/alex/.arduino15/packages/arduino/hardware/avr/1.8.7/libraries/SoftwareSerial"
+    - "-I/home/alex/.arduino15/packages/arduino/hardware/avr/1.8.7/libraries/Servo"
+    - "-I/home/alex/.arduino15/packages/arduino/hardware/avr/1.8.7/libraries/Wire"
+    - "-I/home/alex/.arduino15/packages/arduino/hardware/avr/1.8.7/libraries/EEPROM"
 
     # Флаги компилятора для AVR
     - "-mmcu=atmega328p"      # плата Arduino Uno / Nano
