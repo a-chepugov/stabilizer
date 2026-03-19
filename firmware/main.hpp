@@ -1,8 +1,12 @@
-#include "Arduino.h"
-#include "Periods.hpp"
-#include "State.hpp"
+#include <stdint.h>
+#include <Arduino.h>
+#include <HardwareSerial.h>
+
 
 #include "cfg.hpp"
+
+#include "Periods.hpp"
+#include "State.hpp"
 
 constexpr uint8_t Relay5 = 5;
 constexpr uint8_t Relay6 = 6;
@@ -46,40 +50,40 @@ void disconnect() {
   Serial.println("disconnect");
 }
 
-State<uint16_t> state_crit_lo(cfg::adc_ranges[9], 0xFFFF, disconnect);
+State<uint16_t> state_crit_hi{ cfg::adc_ranges[0], 0xFFFF, disconnect };
 
-State<uint16_t> state_4(cfg::adc_ranges[7], cfg::adc_ranges[8], connect_to_4);
-State<uint16_t> state_5(cfg::adc_ranges[5], cfg::adc_ranges[6], connect_to_5);
-State<uint16_t> state_6(cfg::adc_ranges[3], cfg::adc_ranges[4], connect_to_6);
-State<uint16_t> state_7(cfg::adc_ranges[1], cfg::adc_ranges[2], connect_to_7);
+State<uint16_t> state_4{ cfg::adc_ranges[2], cfg::adc_ranges[1], connect_to_4 };
+State<uint16_t> state_5{ cfg::adc_ranges[4], cfg::adc_ranges[3], connect_to_5 };
+State<uint16_t> state_6{ cfg::adc_ranges[6], cfg::adc_ranges[5], connect_to_6 };
+State<uint16_t> state_7{ cfg::adc_ranges[8], cfg::adc_ranges[7], connect_to_7 };
 
-State<uint16_t> state_crit_hi(0, cfg::adc_ranges[0], disconnect);
+State<uint16_t> state_crit_lo{ 0, cfg::adc_ranges[9], disconnect };
 
-State<uint16_t> * current_state = &state_crit_lo;
+State<uint16_t> * current_state = &state_crit_hi;
 
 inline void link() {
-    state_crit_lo.above = &state_4;
+    state_crit_hi.below = &state_4;
 
-    state_4.below = &state_crit_lo;
-    state_4.above = &state_5;
+    state_4.above = &state_crit_hi;
+    state_4.below = &state_5;
 
-    state_5.below = &state_4;
-    state_5.above = &state_6;
-    
-    state_6.below = &state_5;
-    state_6.above = &state_7;
-    
-    state_7.below = &state_6;
-    state_7.above = &state_crit_hi;
+    state_5.above = &state_4;
+    state_5.below = &state_6;
 
-    state_crit_hi.below = &state_7;
+    state_6.above = &state_5;
+    state_6.below = &state_7;
+
+    state_7.above = &state_6;
+    state_7.below = &state_crit_lo;
+
+    state_crit_lo.above = &state_7;
 };
 
 void setup() {
-  pinMode(Relay5, OUTPUT); 
-  pinMode(Relay6, OUTPUT); 
-  pinMode(Relay7, OUTPUT); 
-  pinMode(Relay8, OUTPUT); 
+  pinMode(Relay5, OUTPUT);
+  pinMode(Relay6, OUTPUT);
+  pinMode(Relay7, OUTPUT);
+  pinMode(Relay8, OUTPUT);
 
     // disconnect();
 
@@ -87,7 +91,7 @@ void setup() {
   Serial.println("\n===");
   Serial.println("123");
 
-  
+
   //  Serial.print("k_crit_min: ");
   //  Serial.println(k_crit_min);
   //  Serial.print("k_crit_max: ");
@@ -110,11 +114,9 @@ void setup() {
   //   Serial.println(cfg::cV_ranges[i]);
   // }
 
-  for (size_t i = 0; i < cfg::adc_ranges.length; ++i) {
-    Serial.println((float)cfg::adc_ranges[i]);
-  }
-
-
+  // for (size_t i = 0; i < cfg::adc_ranges.length; ++i) {
+  //   Serial.println((float)cfg::adc_ranges[i]);
+  // }
 
   // Serial.println("|-|");
   // Serial.println(adc_to_cV(298)); // 150.00
@@ -144,10 +146,10 @@ void setup() {
   // Serial.println(DELAY_MCS);
 
 
-  
+
 
 //   Serial.println("***");
-   
+
 //   for(size_t i = 0; i < 4; i++) {
 //      Serial.print(ranges_adc[i].lo);
 //      Serial.print(' ');
@@ -161,7 +163,7 @@ void setup() {
    current_state->apply();
 }
 
-Periods periods;
+Periods periods{};
 
 char buffer[80];
 
@@ -186,19 +188,16 @@ void loop() {
     size_t head = periods.raw.head;
     if (periods.push(A0)) {
         uint16_t rms = avg();
-        Serial.println("");
-        // sprintf(buffer, "t%3d : h %4d > pin=%4d | d=%3d | V=%3d", periods.ticks, head, rms, adc_to_direct(rms), adc_to_cV(rms));
         int8_t status = current_state->check(rms);
         if (status == 1) {
-          Serial.println("status  1");
           current_state = current_state->above;
           current_state->apply();
         } else if (status == -1) {
-          Serial.println("status -1");
           current_state = current_state->below;
           current_state->apply();
         }
-        
+
+        // sprintf(buffer, "t%3d : h %4d > pin=%4d | d=%3d | V=%3d", periods.ticks, head, rms, adc_to_direct(rms), adc_to_cV(rms));
         sprintf(buffer, "t%3d: h %4d > r=%4d | V=%3d (s=%2d)", periods.ticks, head, rms, adc_to_cV(rms), status);
         Serial.println(buffer);
     }
