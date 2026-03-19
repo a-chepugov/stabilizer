@@ -3,7 +3,7 @@
 
 #include "Transformer.hpp"
 #include "../utils/utils.hpp"
-#include "../models/ConstArray.hpp"
+#include "../models/ArrayView.hpp"
 
 namespace cfg {
   constexpr float shift = 0.05;
@@ -23,7 +23,7 @@ namespace cfg {
   constexpr TLineCfg t_7_h = { tr::k_7, tr::k_crit_max, 1 };
   constexpr TLineCfg t_max = { tr::k_7, tr::k_crit_max, 1 - shift };
 
-  constexpr ConstArray<TLineCfg, 10> t_k_tuples{{
+  constexpr ArrayView<TLineCfg, 10> t_k_tuples{{
     t_min,
     t_4_l,
     t_4_h,
@@ -41,11 +41,11 @@ namespace cfg {
   };
 
   // "Границы" диапазонов по коэффициентам отвода
-  constexpr ConstArray<float, 10>t_k_ranges = t_k_tuples.map<float>(place);
+  constexpr ArrayView<float, 10>t_k_ranges = t_k_tuples.map<float>(place);
 
   // Границы диапазонов в сантивольтах
-  constexpr ConstArray<float, 10>cV_ranges = t_k_ranges.map<float>(tr::get_input_cV);
+  constexpr ArrayView<float, 10>cV_ranges = t_k_ranges.map<float>(tr::get_input_cV);
 
   // Границы диапазонов в единицах АЦП
-  constexpr ConstArray<uint16_t, 10>adc_ranges = cV_ranges.map<uint16_t>(tr::cV_to_adc);
+  constexpr ArrayView<uint16_t, 10>adc_ranges = cV_ranges.map<uint16_t>(tr::cV_to_adc);
 }
