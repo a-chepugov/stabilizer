@@ -40,11 +40,15 @@ namespace cfg {
     return utils::spacing(cfg.a, cfg.b, cfg.part);
   };
 
+  constexpr float get_input_cV(float k_out) {
+    return tr::calc_input_voltage(tr::target_rms_cV, tr::input_k, k_out);
+  }
+
   // "Границы" диапазонов по коэффициентам отвода
   constexpr ArrayView<float, 10>t_k_ranges = t_k_tuples.map<float>(place);
 
   // Границы диапазонов в сантивольтах
-  constexpr ArrayView<float, 10>cV_ranges = t_k_ranges.map<float>(tr::get_input_cV);
+  constexpr ArrayView<float, 10>cV_ranges = t_k_ranges.map<float>(get_input_cV);
 
   // Границы диапазонов в единицах АЦП
   constexpr ArrayView<uint16_t, 10>adc_ranges = cV_ranges.map<uint16_t>(tr::cV_to_adc);
