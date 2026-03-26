@@ -3,7 +3,7 @@
 #include <HardwareSerial.h>
 
 #include "cfg/cfg.hpp"
-#include "cfg/Transformer.hpp"
+#include "hw/hw.hpp"
 
 #include "models/Periods.hpp"
 #include "models/State.hpp"
@@ -57,21 +57,21 @@ void disconnect() {
   status = 0;
 }
 
-State<uint16_t> state_crit_hi{ cfg::adc_ranges[0], 0xFFFF, disconnect };
+State<uint16_t> state_hi{ cfg::adc_ranges[0], 0xFFFF, disconnect };
 
 State<uint16_t> state_4{ cfg::adc_ranges[2], cfg::adc_ranges[1], connect_to_4 };
 State<uint16_t> state_5{ cfg::adc_ranges[4], cfg::adc_ranges[3], connect_to_5 };
 State<uint16_t> state_6{ cfg::adc_ranges[6], cfg::adc_ranges[5], connect_to_6 };
 State<uint16_t> state_7{ cfg::adc_ranges[8], cfg::adc_ranges[7], connect_to_7 };
 
-State<uint16_t> state_crit_lo{ 0, cfg::adc_ranges[9], disconnect };
+State<uint16_t> state_lo{ 0, cfg::adc_ranges[9], disconnect };
 
-State<uint16_t> * current_state = &state_crit_hi;
+State<uint16_t> * current_state = &state_hi;
 
 inline void link() {
-    state_crit_hi.below = &state_4;
+    state_hi.below = &state_4;
 
-    state_4.above = &state_crit_hi;
+    state_4.above = &state_hi;
     state_4.below = &state_5;
 
     state_5.above = &state_4;
@@ -81,9 +81,9 @@ inline void link() {
     state_6.below = &state_7;
 
     state_7.above = &state_6;
-    state_7.below = &state_crit_lo;
+    state_7.below = &state_lo;
 
-    state_crit_lo.above = &state_7;
+    state_lo.above = &state_7;
 };
 
 void setup() {
@@ -100,11 +100,17 @@ void setup() {
   Serial.println("123");
 
 
-  //  Serial.print("k_crit_min: ");
-  //  Serial.println(k_crit_min);
-  //  Serial.print("k_crit_max: ");
-  //  Serial.println(k_crit_max);
+   Serial.print("k_crit_min: ");
+   Serial.println(hw::k_crit_min);
+   Serial.print("k_crit_max: ");
+   Serial.println(hw::k_crit_max);
 
+  //  Serial.print("k_crit_min: ");
+  //  Serial.println(hw::k_crit_min1);
+  //  Serial.print("k_crit_max: ");
+  //  Serial.println(hw::k_crit_max1);
+
+  // Serial.println("t_k_tuples");
   // for (size_t i = 0; i < cfg::t_k_tuples.length; ++i) {
   //   Serial.print(cfg::t_k_tuples[i].a);
   //   Serial.print(" ");
@@ -114,58 +120,79 @@ void setup() {
   //   Serial.println("");
   // }
 
+  // Serial.println("t_k_ranges");
   // for (size_t i = 0; i < cfg::t_k_ranges.length; ++i) {
   //   Serial.println(cfg::t_k_ranges[i]);
   // }
 
+  // Serial.println("cV_ranges");
   // for (size_t i = 0; i < cfg::cV_ranges.length; ++i) {
   //   Serial.println(cfg::cV_ranges[i]);
   // }
 
+  // Serial.println("adc_ranges");
   // for (size_t i = 0; i < cfg::adc_ranges.length; ++i) {
   //   Serial.println((float)cfg::adc_ranges[i]);
   // }
+  
+  Serial.println("states");
+  State<uint16_t> states[6] = { state_hi, state_4, state_5, state_6, state_7, state_lo };
+  for(size_t i = 0; i < 6; i++) {
+     Serial.print(states[i].lo);
+     Serial.print(' ');
+     Serial.print(states[i].hi);
+     Serial.println(' ');
+  }
 
-  // Serial.println("|-|");
-  // Serial.println(adc_to_cV(298)); // 150.00
-  // Serial.println(adc_to_cV(470)); // 230.00
-  // Serial.println(adc_to_cV(650)); // 315.00
-  // Serial.println(adc_to_cV(1012)); // 485.00
-  // Serial.println("||");
-  // Serial.println(cV_to_adc(15000)); // 298
-  // Serial.println(cV_to_adc(23000)); // 469
-  // Serial.println(cV_to_adc(31500)); // 650
-  // Serial.println(cV_to_adc(48500)); // 1012
-  // Serial.println("|-|");
+  // 654 65535 
+  // 491 661
+  // 417 502 
+  // 371 422  
+  // 311 376 
+  // 0 313 
 
-  //  Serial.print("i_test_to_in_factor: ");
-  //  Serial.println(i_test_to_in_factor);
+// 610 65535 
+// 491 613 
+// 417 502 
+// 371 422 
+// 298 376 
+// 0 300 
+  
+  Serial.println("|---|");
+  Serial.println(hw::adc_to_cV(127)); //  (V)  69.00
+  Serial.println(hw::adc_to_cV(255)); //  (V) 129.00
+  Serial.println(hw::adc_to_cV(512)); //  (V) 249.00
+  Serial.println(hw::adc_to_cV(1023)); // (V) 489.00
+  Serial.println("|-|");
+  Serial.println(hw::cV_to_adc(15000)); // (adc) 298
+  Serial.println(hw::cV_to_adc(23000)); // (adc) 469
+  Serial.println(hw::cV_to_adc(31500)); // (adc) 650
+  Serial.println(hw::cV_to_adc(48500)); // (adc) 1012
+  Serial.println("|---|");
 
-  //  Serial.print("diode_drop_cV: ");
-  //  Serial.println(diode_drop_cV);
+  Serial.print("target_rms_cV: ");
+  Serial.println(hw::target_rms_cV);
+  Serial.print("input_rms_cV_min: ");
+  Serial.println(hw::input_rms_cV_min);
+  Serial.print("input_rms_cV_max: ");
+  Serial.println(hw::input_rms_cV_max);
 
-  //  Serial.print("divider_factor: ");
-  //  Serial.println(divider_factor);
+   Serial.print("test_to_in_factor: ");
+   Serial.println(hw::test_to_in_factor);
 
-  //  Serial.print("probe_to_divider_factor: ");
-  //  Serial.println(probe_to_divider_factor);
+   Serial.print("diode_drop_cV: ");
+   Serial.println(hw::diode_drop_cV);
 
-  // Serial.print("DELAY_MCS:");
-  // Serial.println(DELAY_MCS);
+   Serial.print("divider_factor: ");
+   Serial.println(hw::divider_factor);
 
+   Serial.print("probe_to_divider_factor: ");
+   Serial.println(hw::probe_to_divider_factor);
 
+  Serial.print("DELAY_MCS:");
+  Serial.println(DELAY_MCS);
 
-
-//   Serial.println("***");
-
-//   for(size_t i = 0; i < 4; i++) {
-//      Serial.print(ranges_adc[i].lo);
-//      Serial.print(' ');
-//      Serial.print(ranges_adc[i].hi);
-//      Serial.println(' ');
-//   }
-
-   Serial.println("+++");
+  Serial.println("+++");
 }
 
 Periods periods{};
@@ -202,8 +229,8 @@ void loop() {
           current_state->apply();
         }
 
-        // sprintf(buffer, "t%3d : h %4d > pin=%4d | d=%3d | V=%3d", periods.ticks, head, rms, adc_to_direct(rms), adc_to_cV(rms));
-        sprintf(buffer, "t:%3d |h:%3d > r:%4d | V:%3d (s:%1d|%2d)", periods.ticks, head, rms, tr::adc_to_cV(rms), status, status_check);
+        // sprintf(buffer, "t%3d : h %4d > pin=%4d | d=%3d | V=%3d", periods.ticks, head, rms, adc:to_cV(rms), adc_to_cV(rms));
+        sprintf(buffer, "t:%3d |h:%3d > r:%4d | V:%3d (s:%1d|%2d)", periods.ticks, head, rms, hw::adc_to_cV(rms), status, status_check);
         Serial.println(buffer);
     }
   }

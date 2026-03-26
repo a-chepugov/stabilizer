@@ -11,7 +11,7 @@ namespace tr {
   constexpr uint16_t k_2 = 5;
 
   // Коэффициент входного напряжения
-  constexpr uint16_t input_k = k_5;
+  constexpr uint16_t k_in_default = k_5;
   // Коэффициент для замера
   constexpr uint16_t test_k = k_2;
 

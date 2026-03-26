@@ -1,32 +1,36 @@
 #pragma once
 
-#include "../hw/adc.hpp"
-#include "../hw/transformer.hpp"
+#include "adc.hpp"
+#include "transformer.hpp"
 
-namespace tr {
-  constexpr uint16_t target_rms_V = 220;  // amp 311
-  constexpr uint16_t target_rms_V_min = 155;  // amp 219
-  constexpr uint16_t target_rms_V_max = 315;  // amp 445
+namespace hw {
+  // допустимое отклонение +10% / -15%
 
+  constexpr uint16_t target_rms_cV = 220 * 100; // amp 311
+  constexpr uint16_t target_rms_cV_min = target_rms_cV * 0.85; 
+  constexpr uint16_t target_rms_cV_max = target_rms_cV * 1.1;
+
+  constexpr uint16_t input_rms_cV_min = tr::calc_input_voltage(target_rms_cV_min, tr::k_in_default, tr::k_7);
+  constexpr uint16_t input_rms_cV_max = tr::calc_input_voltage(target_rms_cV_max, tr::k_in_default, tr::k_4);
+  
   /**
-  | # |   k | rms | amp | rms|t |
+  | # |   k | amp | rms | rms|t |
   | - | --- | --- | --- | ----- |
-  | 7 | 100 | 176 | 249 |   354 | 
-  | 6 |  90 | 195 | 276 |   394 |
-  | 5 |  80 | 220 | 311 |   448 |
-  | 4 |  65 | 270 | 382 |   554 |
+  | 7 | 100 | 249 | 176 |   354 | 
+  | 6 |  90 | 276 | 195 |   394 |
+  | 5 |  80 | 311 | 220 |   448 |
+  | 4 |  65 | 382 | 270 |   554 |
   */
 
-  constexpr uint16_t target_rms_cV = target_rms_V * 100; // 230.00 В в сантивольтах
-
-  constexpr float get_trans_koef(float cV) {
-    return (float)target_rms_cV * input_k / cV;
+  constexpr float get_trans_koef(float V) {
+    return (float)target_rms_cV * tr::k_in_default / V;
   }
 
-  constexpr uint16_t k_crit_min = get_trans_koef(target_rms_V_max * 100);
-  constexpr uint16_t k_crit_max = get_trans_koef(target_rms_V_min * 100);
+  constexpr float k_crit_min = get_trans_koef(input_rms_cV_max);
+  constexpr float k_crit_max = get_trans_koef(input_rms_cV_min);
 
-  constexpr float test_to_in_factor = input_k / test_k;
+
+  constexpr float test_to_in_factor = tr::k_in_default / tr::test_k;
   constexpr uint16_t i_test_to_in_factor = test_to_in_factor;
   
   // Падение на диоде выпрямления
