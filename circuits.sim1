@@ -40,9 +40,9 @@
 
 <item itemtype="Tunnel" CircId="Tunnel-1138" mainComp="false" Show_id="false" Show_Val="false" Pos="-168,-124" rotation="0" hflip="-1" vflip="1" label="Tunnel-1138" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="ttest0" IsBus="false" />
 
-<item itemtype="Switch" CircId="Switch-1141" mainComp="false" Show_id="false" Show_Val="false" Pos="-208,152" rotation="0" hflip="1" vflip="1" label="Switch-1141" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" DT="false" Poles="1" />
+<item itemtype="Switch" CircId="Switch-1141" mainComp="false" Show_id="false" Show_Val="false" Pos="-208,152" rotation="0" hflip="1" vflip="1" label="Switch-1141" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="true" DT="false" Poles="1" />
 
-<item itemtype="Switch" CircId="Switch-1142" mainComp="false" Show_id="false" Show_Val="false" Pos="-208,200" rotation="0" hflip="1" vflip="1" label="Switch-1142" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" DT="false" Poles="1" />
+<item itemtype="Switch" CircId="Switch-1142" mainComp="false" Show_id="false" Show_Val="false" Pos="-208,200" rotation="0" hflip="1" vflip="1" label="Switch-1142" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="true" DT="false" Poles="1" />
 
 <item itemtype="Switch" CircId="Switch-1150" mainComp="false" Show_id="false" Show_Val="false" Pos="-84,192" rotation="0" hflip="1" vflip="1" label="Switch-1150" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" DT="false" Poles="5" />
 
@@ -80,7 +80,7 @@
 
 <item itemtype="Zener" CircId="Zener-1188" mainComp="false" Show_id="false" Show_Val="false" Pos="-236,4" rotation="270" hflip="1" vflip="1" label="Zener-1188" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Model="Zener Default" Threshold="0.634767 V" MaxCurrent="1 A" Resistance="0.05 Ω" BrkDownV="100 V" SatCurrent="171.435 nA" EmCoef="2" />
 
-<item itemtype="Switch" CircId="Switch-1190" mainComp="false" Show_id="false" Show_Val="false" Pos="-196,28" rotation="0" hflip="1" vflip="1" label="Switch-1190" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" DT="false" Poles="1" />
+<item itemtype="Switch" CircId="Switch-1190" mainComp="false" Show_id="false" Show_Val="false" Pos="-196,28" rotation="0" hflip="1" vflip="1" label="Switch-1190" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="true" DT="false" Poles="1" />
 
 <item itemtype="Tunnel" CircId="Tunnel-1192" mainComp="false" Show_id="false" Show_Val="false" Pos="-108,-12" rotation="0" hflip="1" vflip="1" label="Tunnel-1192" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="a_pwr" IsBus="false" />
 
@@ -90,7 +90,7 @@
 
 <item itemtype="Tunnel" CircId="Tunnel-1197" mainComp="false" Show_id="false" Show_Val="false" Pos="-292,28" rotation="0" hflip="1" vflip="1" label="Tunnel-1197" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="ttest0" IsBus="false" />
 
-<item itemtype="Switch" CircId="Switch-1200" mainComp="false" Show_id="false" Show_Val="false" Pos="-264,200" rotation="0" hflip="1" vflip="1" label="Switch-1200" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" DT="false" Poles="1" />
+<item itemtype="Switch" CircId="Switch-1200" mainComp="false" Show_id="false" Show_Val="false" Pos="-264,200" rotation="0" hflip="1" vflip="1" label="Switch-1200" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="true" DT="false" Poles="1" />
 
 <item itemtype="Tunnel" CircId="Tunnel-1202" mainComp="false" Show_id="false" Show_Val="false" Pos="-224,-68" rotation="0" hflip="-1" vflip="1" label="Tunnel-1202" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="inp-a" IsBus="false" />
 
@@ -170,15 +170,15 @@
 
 <item itemtype="Tunnel" CircId="Tunnel-1254" mainComp="false" Show_id="false" Show_Val="false" Pos="-140,360" rotation="0" hflip="1" vflip="1" label="Tunnel-1254" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="a_8" IsBus="false" />
 
-<item itemtype="SerialTerm" CircId="SerialTerm-1255" mainComp="false" Show_id="false" Show_Val="false" Pos="-168,288" rotation="180" hflip="1" vflip="1" label="SerialTerm-1255" idLabPos="-20,-32" labelrot="0" valLabPos="-16,20" valLabRot="0" Baudrate="9600 _Bd" DataBits="8 _bits" StopBits="1 _bits" SerialMon="true" />
+<item itemtype="SerialTerm" CircId="SerialTerm-1255" mainComp="false" Show_id="false" Show_Val="false" Pos="-168,288" rotation="180" hflip="1" vflip="1" label="SerialTerm-1255" idLabPos="-20,-32" labelrot="0" valLabPos="-16,20" valLabRot="0" Baudrate="9600 _Bd" DataBits="8 _bits" StopBits="1 _bits" SerialMon="false" />
 
 <item itemtype="Switch" CircId="Switch-1256" mainComp="false" Show_id="false" Show_Val="false" Pos="-24,320" rotation="0" hflip="1" vflip="1" label="Switch-1256" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" DT="false" Poles="1" />
 
 <item itemtype="Resistor" CircId="Resistor-1257" mainComp="false" Show_id="false" Show_Val="false" Pos="-320,260" rotation="0" hflip="1" vflip="1" label="Resistor-1257" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
 
-<item itemtype="Switch" CircId="Switch-1258" mainComp="false" Show_id="false" Show_Val="false" Pos="-24,352" rotation="0" hflip="1" vflip="1" label="Switch-1258" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" DT="false" Poles="1" />
+<item itemtype="Switch" CircId="Switch-1258" mainComp="false" Show_id="false" Show_Val="false" Pos="-24,352" rotation="0" hflip="1" vflip="1" label="Switch-1258" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="true" DT="false" Poles="1" />
 
-<item itemtype="Switch" CircId="Switch-1259" mainComp="false" Show_id="false" Show_Val="false" Pos="-24,384" rotation="0" hflip="1" vflip="1" label="Switch-1259" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" DT="false" Poles="1" />
+<item itemtype="Switch" CircId="Switch-1259" mainComp="false" Show_id="false" Show_Val="false" Pos="-24,384" rotation="0" hflip="1" vflip="1" label="Switch-1259" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="true" DT="false" Poles="1" />
 
 <item itemtype="Resistor" CircId="Resistor-1260" mainComp="false" Show_id="false" Show_Val="false" Pos="-320,356" rotation="0" hflip="1" vflip="1" label="Resistor-1260" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="100 Ω" />
 
