@@ -36,16 +36,18 @@ namespace hw {
   constexpr float test_to_in_factor = tr::k_in_default / tr::test_k;
   
   // Падение на диоде выпрямления
-  constexpr float diode_drop = 0.613127;
+  constexpr float diode_drop = 0.6;
   constexpr uint16_t diode_drop_cV = diode_drop * 100;
 
   // Характеристики делителm напряжения
-  constexpr float R1 = 50000;
+  constexpr float R1 = 42000;
   constexpr float R2 = 10000;
 
   constexpr float divider_factor = R1 / R2 + 1;
 
   ////////////////////////////////////////////////////////////////////////////////
+
+  // 311.00 [rms 220] -> 19.44 [rms 13.74] -> 18.83 [rms 13.31] -> 3.62 [rms 2.56] -> adc 740 [rms 524]
 
   // Пересчёт показаний АЦП в сантивольты на входе трансформатора
   constexpr float adc_to_V(uint16_t input) {

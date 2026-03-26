@@ -97,7 +97,7 @@ void setup() {
 
   Serial.begin(9600);
   Serial.println("\n===");
-  Serial.println("123");
+  Serial.println(__TIME__);
 
   // Serial.print("OUTPUT_cV_RMS_TARGET: ");
   // Serial.println(hw::OUTPUT_cV_RMS_TARGET);
@@ -119,14 +119,43 @@ void setup() {
   //  Serial.print("test_to_in_factor: ");
   //  Serial.println(hw::test_to_in_factor);
 
-  //  Serial.print("diode_drop_cV: ");
-  //  Serial.println(hw::diode_drop_cV);
+  //  Serial.print("diode_drop: ");
+  //  Serial.println(hw::diode_drop);
 
   //  Serial.print("divider_factor: ");
   //  Serial.println(hw::divider_factor);
 
   // Serial.print("DELAY_MCS:");
   // Serial.println(DELAY_MCS);
+
+  Serial.println("***");
+
+  Serial.println(hw::adc_to_V(517)); //  (V) 221.06
+  Serial.println(hw::adc_to_cV(517)); // (V) 22096
+  Serial.println(hw::V_to_adc(220.0f)); // (adc) 517
+  Serial.println(hw::cV_to_adc(22000)); // (adc) 517
+
+  Serial.println("|---|");
+  Serial.println(hw::adc_to_V(127)); //  (V)  61.24
+  Serial.println(hw::adc_to_V(255)); //  (V) 113.30
+  Serial.println(hw::adc_to_V(512)); //  (V) 217.80
+  Serial.println(hw::adc_to_V(1023)); // (V) 425.60
+  Serial.println("|*|");
+  Serial.println(hw::adc_to_cV(127)); //  (V)  6112
+  Serial.println(hw::adc_to_cV(255)); //  (V) 11312
+  Serial.println(hw::adc_to_cV(512)); //  (V) 21776
+  Serial.println(hw::adc_to_cV(1023)); // (V) 42544
+  Serial.println("|-|");
+  Serial.println(hw::V_to_adc(150.0f)); // (adc) 345
+  Serial.println(hw::V_to_adc(230.0f)); // (adc) 541
+  Serial.println(hw::V_to_adc(315.0f)); // (adc) 751
+  Serial.println(hw::V_to_adc(425.0f)); // (adc) 1021
+  Serial.println("|*|");
+  Serial.println(hw::cV_to_adc(15000)); // (adc) 345
+  Serial.println(hw::cV_to_adc(23000)); // (adc) 541
+  Serial.println(hw::cV_to_adc(31500)); // (adc) 750
+  Serial.println(hw::cV_to_adc(42500)); // (adc) 1021
+  Serial.println("|---|");
 
 
   // Serial.println("t_k_tuples");
@@ -163,46 +192,21 @@ void setup() {
      Serial.println(' ');
   }
 
-  // 654 65535 
-  // 491 661
-  // 417 502 
-  // 371 422  
-  // 311 376 
-  // 0 313 
+  // 705 65535 
 
-// 610 65535 
-// 491 613 
-// 417 502 
-// 371 422 
-// 298 376 
-// 0 300 
+  // 567 708 
   
-  Serial.println("|---|");
-  Serial.println(hw::adc_to_V(127)); //  (V)  6928
-  Serial.println(hw::adc_to_V(255)); //  (V) 12928
-  Serial.println(hw::adc_to_V(512)); //  (V) 24992
-  Serial.println(hw::adc_to_V(1023)); // (V) 48960
-  Serial.println("|*|");
-  Serial.println(hw::adc_to_cV(127)); //  (V)  6928
-  Serial.println(hw::adc_to_cV(255)); //  (V) 12928
-  Serial.println(hw::adc_to_cV(512)); //  (V) 24992
-  Serial.println(hw::adc_to_cV(1023)); // (V) 48960
-  Serial.println("|-|");
-  Serial.println(hw::V_to_adc(150.0f)); // (adc) 298
-  Serial.println(hw::V_to_adc(230.0f)); // (adc) 469
-  Serial.println(hw::V_to_adc(315.0f)); // (adc) 650
-  Serial.println(hw::V_to_adc(485.0f)); // (adc) 1012
-  Serial.println("|*|");
-  Serial.println(hw::cV_to_adc(15000)); // (adc) 298
-  Serial.println(hw::cV_to_adc(23000)); // (adc) 469
-  Serial.println(hw::cV_to_adc(31500)); // (adc) 650
-  Serial.println(hw::cV_to_adc(48500)); // (adc) 1012
-  Serial.println("|---|");
+  // 482 579 
+  
+  // 429 488 
+  
+  // 344 434 
+  
+  // 0 347 
+  
 
   Serial.println("+++");
 }
-
-// 311.00 [rms 220] -> 19.44 -> 19.18 -> 3.69 -> adc 754 (rms 533)
 
 Periods periods{};
 

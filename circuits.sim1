@@ -12,9 +12,9 @@
 
 <item itemtype="Switch" CircId="Switch-585" mainComp="false" Show_id="false" Show_Val="false" Pos="-80,-152" rotation="0" hflip="1" vflip="1" label="Switch-585" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" DT="false" Poles="5" />
 
-<item itemtype="WaveGen" CircId="WaveGen-1009" mainComp="false" Show_id="false" Show_Val="false" Pos="-292,-192" rotation="0" hflip="1" vflip="1" label="WaveGen-1009" idLabPos="-64,-24" labelrot="0" valLabPos="-16,8" valLabRot="0" Out="true" Running="true" Wave_Type="Sine" Freq="50 Hz" Phase="0 _º" Steps="32 _Steps" Duty="50 _%" Always_On="false" Bipolar="true" Floating="true" Semi_Ampli="311 V" Mid_Volt="0 V" />
+<item itemtype="WaveGen" CircId="WaveGen-1009" mainComp="false" Show_id="false" Show_Val="false" Pos="-292,-192" rotation="0" hflip="1" vflip="1" label="WaveGen-1009" idLabPos="-64,-24" labelrot="0" valLabPos="-16,8" valLabRot="0" Out="true" Running="true" Wave_Type="Sine" Freq="50 Hz" Phase="0 _º" Steps="64 _Steps" Duty="50 _%" Always_On="false" Bipolar="true" Floating="true" Semi_Ampli="311 V" Mid_Volt="0 V" />
 
-<item itemtype="Transformer" CircId="Transformer-1073" mainComp="false" Show_id="false" Show_Val="false" Pos="-192,-300" rotation="0" hflip="1" vflip="1" label="Transformer-1073" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" CoupCoeff="0.9999" BaseInd="120 H" Primary="80" Secondary=" 10,10,15,65:1,5,-5" />
+<item itemtype="Transformer" CircId="Transformer-1073" mainComp="false" Show_id="false" Show_Val="false" Pos="-120,-492" rotation="0" hflip="1" vflip="1" label="Transformer-1073" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" CoupCoeff="0.9999" BaseInd="120 H" Primary="80" Secondary=" 10,10,15,65:1,5,5" />
 
 <item itemtype="Tunnel" CircId="Tunnel-1085" mainComp="false" Show_id="false" Show_Val="false" Pos="-268,-196" rotation="0" hflip="-1" vflip="1" label="Tunnel-1085" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="tin5" IsBus="false" />
 
@@ -50,13 +50,13 @@
 
 <item itemtype="Tunnel" CircId="Tunnel-1152" mainComp="false" Show_id="false" Show_Val="false" Pos="-108,192" rotation="0" hflip="1" vflip="1" label="Tunnel-1152" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="a_gnd" IsBus="false" />
 
-<item itemtype="Oscope" CircId="Oscope-1155" mainComp="false" Show_id="false" Show_Val="false" Pos="32,152" rotation="0" hflip="1" vflip="1" label="Oscope-test" idLabPos="-90,-100" labelrot="0" valLabPos="-16,20" valLabRot="0" Basic_X="135 _px" Basic_Y="135 _px" BufferSize="60000" connectGnd="false" InputImped="10 MΩ" TimDiv="5000000000" TimPos="0,0,0,0," VolDiv="6,6,6,6," Tunnels=",,,," Trigger="4" Filter="0.1 V" AutoSC="4" Tracks="1" HideCh="true,true,false,false," VolPos="0,0,0,0," />
+<item itemtype="Oscope" CircId="Oscope-1155" mainComp="false" Show_id="false" Show_Val="false" Pos="32,152" rotation="0" hflip="1" vflip="1" label="Oscope-test" idLabPos="-90,-100" labelrot="0" valLabPos="-16,20" valLabRot="0" Basic_X="135 _px" Basic_Y="135 _px" BufferSize="60000" connectGnd="false" InputImped="10 MΩ" TimDiv="5000000000" TimPos="323275860,323275860,323275860,323275860," VolDiv="6,6,6,6," Tunnels=",,,," Trigger="4" Filter="0.1 V" AutoSC="4" Tracks="1" HideCh="true,true,false,false," VolPos="0,0,0,0," />
 
 <item itemtype="Tunnel" CircId="Tunnel-1156" mainComp="false" Show_id="false" Show_Val="false" Pos="-176,200" rotation="360" hflip="-1" vflip="1" label="Tunnel-1156" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="a_gnd" IsBus="false" />
 
 <item itemtype="Diode" CircId="Diode-1158" mainComp="false" Show_id="false" Show_Val="false" Pos="-268,108" rotation="0" hflip="1" vflip="1" label="Diode-1158" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Model="1N5711 Schottky" Threshold="0.613127 V" MaxCurrent="1 A" Resistance="2.8 Ω" BrkDownV="70 V" SatCurrent="315 nA" EmCoef="2.03" />
 
-<item itemtype="Tunnel" CircId="Tunnel-1159" mainComp="false" Show_id="false" Show_Val="false" Pos="-292,108" rotation="0" hflip="1" vflip="1" label="Tunnel-1159" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="ttest2" IsBus="false" />
+<item itemtype="Tunnel" CircId="Tunnel-1159" mainComp="false" Show_id="false" Show_Val="false" Pos="-292,108" rotation="0" hflip="1" vflip="1" label="Tunnel-1159" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="ttest0" IsBus="false" />
 
 <item itemtype="Resistor" CircId="Resistor-1160" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="-236,128" rotation="270" hflip="1" vflip="1" label="Resistor-1160" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Resistance="420 kΩ" />
 
@@ -106,7 +106,7 @@
 
 <item itemtype="Tunnel" CircId="Tunnel-1216" mainComp="false" Show_id="false" Show_Val="false" Pos="-108,128" rotation="0" hflip="1" vflip="1" label="Tunnel-1216" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="ttest2" IsBus="false" />
 
-<item itemtype="Tunnel" CircId="Tunnel-1217" mainComp="false" Show_id="false" Show_Val="false" Pos="-108,144" rotation="0" hflip="1" vflip="1" label="Tunnel-1217" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="ttest1" IsBus="false" />
+<item itemtype="Tunnel" CircId="Tunnel-1217" mainComp="false" Show_id="false" Show_Val="false" Pos="-108,144" rotation="0" hflip="1" vflip="1" label="Tunnel-1217" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="ttest0" IsBus="false" />
 
 <item itemtype="Tunnel" CircId="Tunnel-1226" mainComp="false" Show_id="false" Show_Val="false" Pos="-168,-204" rotation="360" hflip="-1" vflip="1" label="Tunnel-1226" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="tout1" IsBus="false" />
 
@@ -186,6 +186,10 @@
 
 <item itemtype="Tunnel" CircId="Tunnel-1262" mainComp="false" Show_id="false" Show_Val="false" Pos="12,352" rotation="360" hflip="-1" vflip="1" label="Tunnel-1262" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="a_gnd" IsBus="false" />
 
+<item itemtype="Tunnel" CircId="Tunnel-1263" mainComp="false" Show_id="false" Show_Val="false" Pos="-292,92" rotation="0" hflip="1" vflip="1" label="Tunnel-1263" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Name="ttest2" IsBus="false" />
+
+<item itemtype="Diode" CircId="Diode-1264" mainComp="false" Show_id="false" Show_Val="false" Pos="-268,92" rotation="0" hflip="1" vflip="1" label="Diode-1264" idLabPos="-16,-24" labelrot="0" valLabPos="-16,6" valLabRot="0" Model="1N5711 Schottky" Threshold="0.613127 V" MaxCurrent="1 A" Resistance="2.8 Ω" BrkDownV="70 V" SatCurrent="315 nA" EmCoef="2.03" />
+
 <item itemtype="Node" CircId="Node-1167" mainComp="false" Pos="-220,-20" />
 
 <item itemtype="Node" CircId="Node-1168" mainComp="false" Pos="-236,28" />
@@ -201,6 +205,8 @@
 <item itemtype="Node" CircId="Node-1140" mainComp="false" Pos="-236,152" />
 
 <item itemtype="Node" CircId="Node-1201" mainComp="false" Pos="-236,200" />
+
+<item itemtype="Node" CircId="Node-1265" mainComp="false" Pos="-244,108" />
 
 <item itemtype="Connector" uid="Connector-1791" startpinid="Switch-585-pinP0" endpinid="Tunnel-778-pin" pointList="-96,-152,-104,-152" />
 
@@ -222,9 +228,9 @@
 
 <item itemtype="Connector" uid="Connector-2480" startpinid="Switch-585-switch3pinN" endpinid="Oscope-643-Pin1" pointList="-64,-200,-56,-200,-56,-216" />
 
-<item itemtype="Connector" uid="Connector-2504" startpinid="Tunnel-1134-pin" endpinid="Transformer-1073-P01Pin" pointList="-212,-124,-208,-124" />
+<item itemtype="Connector" uid="Connector-2504" startpinid="Tunnel-1134-pin" endpinid="Transformer-1073-P01Pin" pointList="-212,-124,-212,-316,-136,-316" />
 
-<item itemtype="Connector" uid="Connector-2505" startpinid="Tunnel-1133-pin" endpinid="Transformer-1073-P00Pin" pointList="-212,-300,-208,-300" />
+<item itemtype="Connector" uid="Connector-2505" startpinid="Tunnel-1133-pin" endpinid="Transformer-1073-P00Pin" pointList="-212,-300,-212,-492,-136,-492" />
 
 <item itemtype="Connector" uid="Connector-2508" startpinid="Switch-1141-switch0pinN" endpinid="Tunnel-1151-pin" pointList="-192,152,-176,152" />
 
@@ -302,27 +308,25 @@
 
 <item itemtype="Connector" uid="Connector-2629" startpinid="Node-1224-2" endpinid="Resistor-1160-rPin" pointList="-236,108,-236,112" />
 
-<item itemtype="Connector" uid="Connector-2632" startpinid="Diode-1158-rPin" endpinid="Node-1224-0" pointList="-252,108,-236,108" />
-
 <item itemtype="Connector" uid="Connector-2633" startpinid="Diode-1206-rPin" endpinid="Node-1210-1" pointList="-252,-68,-236,-68" />
 
-<item itemtype="Connector" uid="Connector-2635" startpinid="Tunnel-1138-pin" endpinid="Transformer-1073-S13Pin" pointList="-168,-124,-176,-124" />
+<item itemtype="Connector" uid="Connector-2635" startpinid="Tunnel-1138-pin" endpinid="Transformer-1073-S13Pin" pointList="-168,-124,-168,-316,-104,-316" />
 
-<item itemtype="Connector" uid="Connector-2636" startpinid="Tunnel-1128-pin" endpinid="Transformer-1073-S11Pin" pointList="-168,-172,-176,-172" />
+<item itemtype="Connector" uid="Connector-2636" startpinid="Tunnel-1128-pin" endpinid="Transformer-1073-S11Pin" pointList="-168,-172,-168,-364,-104,-364" />
 
-<item itemtype="Connector" uid="Connector-2637" startpinid="Tunnel-1124-pin" endpinid="Transformer-1073-S12Pin" pointList="-168,-148,-176,-148" />
+<item itemtype="Connector" uid="Connector-2637" startpinid="Tunnel-1124-pin" endpinid="Transformer-1073-S12Pin" pointList="-168,-148,-168,-340,-104,-340" />
 
-<item itemtype="Connector" uid="Connector-2638" startpinid="Tunnel-1123-pin" endpinid="Transformer-1073-S10Pin" pointList="-168,-196,-176,-196" />
+<item itemtype="Connector" uid="Connector-2638" startpinid="Tunnel-1123-pin" endpinid="Transformer-1073-S10Pin" pointList="-168,-196,-168,-388,-104,-388" />
 
-<item itemtype="Connector" uid="Connector-2639" startpinid="Tunnel-1125-pin" endpinid="Transformer-1073-S01Pin" pointList="-168,-276,-176,-276" />
+<item itemtype="Connector" uid="Connector-2639" startpinid="Tunnel-1125-pin" endpinid="Transformer-1073-S01Pin" pointList="-168,-276,-168,-468,-104,-468" />
 
-<item itemtype="Connector" uid="Connector-2640" startpinid="Tunnel-1129-pin" endpinid="Transformer-1073-S00Pin" pointList="-168,-300,-176,-300" />
+<item itemtype="Connector" uid="Connector-2640" startpinid="Tunnel-1129-pin" endpinid="Transformer-1073-S00Pin" pointList="-168,-300,-168,-492,-104,-492" />
 
-<item itemtype="Connector" uid="Connector-2641" startpinid="Tunnel-1127-pin" endpinid="Transformer-1073-S02Pin" pointList="-168,-252,-176,-252" />
+<item itemtype="Connector" uid="Connector-2641" startpinid="Tunnel-1127-pin" endpinid="Transformer-1073-S02Pin" pointList="-168,-252,-168,-444,-104,-444" />
 
-<item itemtype="Connector" uid="Connector-2642" startpinid="Tunnel-1130-pin" endpinid="Transformer-1073-S03Pin" pointList="-168,-228,-176,-228" />
+<item itemtype="Connector" uid="Connector-2642" startpinid="Tunnel-1130-pin" endpinid="Transformer-1073-S03Pin" pointList="-168,-228,-168,-420,-104,-420" />
 
-<item itemtype="Connector" uid="Connector-2643" startpinid="Tunnel-1226-pin" endpinid="Transformer-1073-S04Pin" pointList="-168,-204,-176,-204" />
+<item itemtype="Connector" uid="Connector-2643" startpinid="Tunnel-1226-pin" endpinid="Transformer-1073-S04Pin" pointList="-168,-204,-168,-396,-104,-396" />
 
 <item itemtype="Connector" uid="Connector-1792" startpinid="Switch-585-pinP2" endpinid="Tunnel-329-pin" pointList="-96,-168,-104,-168" />
 
@@ -405,5 +409,13 @@
 <item itemtype="Connector" uid="Connector-2679" startpinid="WaveGen-1009-gndnod" endpinid="Tunnel-1086-pin" pointList="-276,-188,-268,-188" />
 
 <item itemtype="Connector" uid="Connector-2681" startpinid="SerialTerm-1255-pin1" endpinid="Nano-1247-1" pointList="-144,280,-128,280" />
+
+<item itemtype="Connector" uid="Connector-2682" startpinid="Tunnel-1263-pin" endpinid="Diode-1264-lPin" pointList="-292,92,-284,92" />
+
+<item itemtype="Connector" uid="Connector-2683" startpinid="Diode-1264-rPin" endpinid="Node-1265-1" pointList="-252,92,-244,92,-244,108" />
+
+<item itemtype="Connector" uid="Connector-2684" startpinid="Diode-1158-rPin" endpinid="Node-1265-0" pointList="-252,108,-244,108" />
+
+<item itemtype="Connector" uid="Connector-2685" startpinid="Node-1265-2" endpinid="Node-1224-0" pointList="-244,108,-236,108" />
 
 </circuit>

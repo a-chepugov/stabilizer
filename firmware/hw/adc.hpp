@@ -11,7 +11,7 @@ namespace adc {
   constexpr uint16_t VREF_cV = VREF * 100;
 
   constexpr float to_V(uint16_t input) {
-    return (VREF * input) / MAX_VALUE;
+    return VREF * input / MAX_VALUE;
   }
 
   // Пересчёт показаний АЦП в сантивольты на датчике
