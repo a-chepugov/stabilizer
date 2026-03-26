@@ -116,17 +116,14 @@ void setup() {
   // Serial.print("k_crit_lo: ");
   // Serial.println(hw::k_crit_lo);
 
-   Serial.print("test_to_in_factor: ");
-   Serial.println(hw::test_to_in_factor);
+  //  Serial.print("test_to_in_factor: ");
+  //  Serial.println(hw::test_to_in_factor);
 
-   Serial.print("diode_drop_cV: ");
-   Serial.println(hw::diode_drop_cV);
+  //  Serial.print("diode_drop_cV: ");
+  //  Serial.println(hw::diode_drop_cV);
 
-   Serial.print("divider_factor: ");
-   Serial.println(hw::divider_factor);
-
-  //  Serial.print("probe_to_divider_factor: ");
-  //  Serial.println(hw::probe_to_divider_factor);
+  //  Serial.print("divider_factor: ");
+  //  Serial.println(hw::divider_factor);
 
   // Serial.print("DELAY_MCS:");
   // Serial.println(DELAY_MCS);
@@ -181,20 +178,25 @@ void setup() {
 // 0 300 
   
   Serial.println("|---|");
-  Serial.println(hw::adc_to_cV(127)); //  (V)  69.00
-  Serial.println(hw::adc_to_cV(255)); //  (V) 129.00
-  Serial.println(hw::adc_to_cV(512)); //  (V) 249.00
-  Serial.println(hw::adc_to_cV(1023)); // (V) 489.00
+  Serial.println(hw::adc_to_V(127)); //  (V)  6928
+  Serial.println(hw::adc_to_V(255)); //  (V) 12928
+  Serial.println(hw::adc_to_V(512)); //  (V) 24992
+  Serial.println(hw::adc_to_V(1023)); // (V) 48960
+  Serial.println("|*|");
+  Serial.println(hw::adc_to_cV(127)); //  (V)  6928
+  Serial.println(hw::adc_to_cV(255)); //  (V) 12928
+  Serial.println(hw::adc_to_cV(512)); //  (V) 24992
+  Serial.println(hw::adc_to_cV(1023)); // (V) 48960
   Serial.println("|-|");
   Serial.println(hw::V_to_adc(150.0f)); // (adc) 298
   Serial.println(hw::V_to_adc(230.0f)); // (adc) 469
   Serial.println(hw::V_to_adc(315.0f)); // (adc) 650
   Serial.println(hw::V_to_adc(485.0f)); // (adc) 1012
-  Serial.println("|-|");
-  Serial.println(hw::cV_to_adc_fast(15000)); // (adc) 298
-  Serial.println(hw::cV_to_adc_fast(23000)); // (adc) 469
-  Serial.println(hw::cV_to_adc_fast(31500)); // (adc) 650
-  Serial.println(hw::cV_to_adc_fast(48500)); // (adc) 1012
+  Serial.println("|*|");
+  Serial.println(hw::cV_to_adc(15000)); // (adc) 298
+  Serial.println(hw::cV_to_adc(23000)); // (adc) 469
+  Serial.println(hw::cV_to_adc(31500)); // (adc) 650
+  Serial.println(hw::cV_to_adc(48500)); // (adc) 1012
   Serial.println("|---|");
 
   Serial.println("+++");

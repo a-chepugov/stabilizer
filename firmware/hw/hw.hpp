@@ -49,15 +49,23 @@ namespace hw {
 
   // Пересчёт показаний АЦП в сантивольты на входе трансформатора
   constexpr float adc_to_V(uint16_t input) {
-    return (
-      adc::to_V(input) * divider_factor + diode_drop
-    ) * test_to_in_factor
-    ;
+    if (input > 0) {
+      return (
+        adc::to_V(input) * divider_factor + diode_drop
+      ) * test_to_in_factor
+      ;
+    } else {
+      return 0;
+    }
   }
 
   // Пересчёт сантивольтов на выходе трансформатора в показания АЦП
-  constexpr float V_to_adc(float V) {
-    return (V / test_to_in_factor - diode_drop) / divider_factor / adc::VREF * adc::MAX_VALUE;
+  constexpr uint16_t V_to_adc(float V) {
+    if (V > 0) {
+      return (V / test_to_in_factor - diode_drop) / divider_factor / adc::VREF * adc::MAX_VALUE;
+    } else {
+      return 0;
+    }
   }
 
   // Коэффициенты для целочисленных вычислений
@@ -66,21 +74,29 @@ namespace hw {
 
   // Пересчёт показаний АЦП в сантивольты на входе трансформатора (целочисленный варианти)
   constexpr uint16_t adc_to_cV(uint16_t input) {
-    return (
-      (uint16_t)(
-        ((uint32_t)input * probe_to_divider_factor) >> adc::BITS
-      ) + diode_drop_cV
-    ) * i_test_to_in_factor
-    ;
+    if (input > 0) {
+      return (
+        (uint16_t)(
+          ((uint32_t)input * probe_to_divider_factor) >> adc::BITS
+        ) + diode_drop_cV
+      ) * i_test_to_in_factor
+      ;
+    } else {
+      return 0;
+    }
   }
 
   // Пересчёт сантивольтов на выходе трансформатора в показания АЦП (целочисленный вариант)
   constexpr uint16_t cV_to_adc(uint16_t cV) {
-    return (
-      (uint32_t)(
-        cV / i_test_to_in_factor - diode_drop_cV
-      ) << adc::BITS
-    ) / probe_to_divider_factor;
+    if (cV >0) {
+      return (
+        (uint32_t)(
+          cV / i_test_to_in_factor - diode_drop_cV
+        ) << adc::BITS
+      ) / probe_to_divider_factor;
+    } else {
+      return 0;
+    }
   }
 
 }
