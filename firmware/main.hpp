@@ -99,16 +99,38 @@ void setup() {
   Serial.println("\n===");
   Serial.println("123");
 
+  // Serial.print("OUTPUT_cV_RMS_TARGET: ");
+  // Serial.println(hw::OUTPUT_cV_RMS_TARGET);
+  // Serial.print("OUTPUT_cV_RMS_MIN: ");
+  // Serial.println(hw::OUTPUT_cV_RMS_MIN);
+  // Serial.print("OUTPUT_cV_RMS_MAX: ");
+  // Serial.println(hw::OUTPUT_cV_RMS_MAX);
 
-   Serial.print("k_crit_min: ");
-   Serial.println(hw::k_crit_min);
-   Serial.print("k_crit_max: ");
-   Serial.println(hw::k_crit_max);
+  // Serial.print("INPUT_cV_RMS_MIN: ");
+  // Serial.println(hw::INPUT_cV_RMS_MIN);
+  // Serial.print("INPUT_cV_RMS_MAX: ");
+  // Serial.println(hw::INPUT_cV_RMS_MAX);
 
-  //  Serial.print("k_crit_min: ");
-  //  Serial.println(hw::k_crit_min1);
-  //  Serial.print("k_crit_max: ");
-  //  Serial.println(hw::k_crit_max1);
+  // Serial.print("k_crit_hi: ");
+  // Serial.println(hw::k_crit_hi);
+  // Serial.print("k_crit_lo: ");
+  // Serial.println(hw::k_crit_lo);
+
+   Serial.print("test_to_in_factor: ");
+   Serial.println(hw::test_to_in_factor);
+
+   Serial.print("diode_drop_cV: ");
+   Serial.println(hw::diode_drop_cV);
+
+   Serial.print("divider_factor: ");
+   Serial.println(hw::divider_factor);
+
+  //  Serial.print("probe_to_divider_factor: ");
+  //  Serial.println(hw::probe_to_divider_factor);
+
+  // Serial.print("DELAY_MCS:");
+  // Serial.println(DELAY_MCS);
+
 
   // Serial.println("t_k_tuples");
   // for (size_t i = 0; i < cfg::t_k_tuples.length; ++i) {
@@ -164,36 +186,21 @@ void setup() {
   Serial.println(hw::adc_to_cV(512)); //  (V) 249.00
   Serial.println(hw::adc_to_cV(1023)); // (V) 489.00
   Serial.println("|-|");
-  Serial.println(hw::cV_to_adc(15000)); // (adc) 298
-  Serial.println(hw::cV_to_adc(23000)); // (adc) 469
-  Serial.println(hw::cV_to_adc(31500)); // (adc) 650
-  Serial.println(hw::cV_to_adc(48500)); // (adc) 1012
+  Serial.println(hw::V_to_adc(150.0f)); // (adc) 298
+  Serial.println(hw::V_to_adc(230.0f)); // (adc) 469
+  Serial.println(hw::V_to_adc(315.0f)); // (adc) 650
+  Serial.println(hw::V_to_adc(485.0f)); // (adc) 1012
+  Serial.println("|-|");
+  Serial.println(hw::cV_to_adc_fast(15000)); // (adc) 298
+  Serial.println(hw::cV_to_adc_fast(23000)); // (adc) 469
+  Serial.println(hw::cV_to_adc_fast(31500)); // (adc) 650
+  Serial.println(hw::cV_to_adc_fast(48500)); // (adc) 1012
   Serial.println("|---|");
-
-  Serial.print("target_rms_cV: ");
-  Serial.println(hw::target_rms_cV);
-  Serial.print("input_rms_cV_min: ");
-  Serial.println(hw::input_rms_cV_min);
-  Serial.print("input_rms_cV_max: ");
-  Serial.println(hw::input_rms_cV_max);
-
-   Serial.print("test_to_in_factor: ");
-   Serial.println(hw::test_to_in_factor);
-
-   Serial.print("diode_drop_cV: ");
-   Serial.println(hw::diode_drop_cV);
-
-   Serial.print("divider_factor: ");
-   Serial.println(hw::divider_factor);
-
-   Serial.print("probe_to_divider_factor: ");
-   Serial.println(hw::probe_to_divider_factor);
-
-  Serial.print("DELAY_MCS:");
-  Serial.println(DELAY_MCS);
 
   Serial.println("+++");
 }
+
+// 311.00 [rms 220] -> 19.44 -> 19.18 -> 3.69 -> adc 754 (rms 533)
 
 Periods periods{};
 

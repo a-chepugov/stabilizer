@@ -7,7 +7,7 @@ namespace tr {
   constexpr uint16_t k_6 = 90;
   constexpr uint16_t k_5 = 80;
   constexpr uint16_t k_4 = 65;
-  constexpr uint16_t k_3 = 11;
+  constexpr uint16_t k_3 = 6;
   constexpr uint16_t k_2 = 5;
 
   // Коэффициент входного напряжения

@@ -12,19 +12,19 @@ namespace cfg {
 
   struct TLineCfg { float a; float b; float part; };
 
-  constexpr TLineCfg t_min = { hw::k_crit_min, tr::k_4, 0 + shift };
-  constexpr TLineCfg t_4_l = { hw::k_crit_min, tr::k_4, 0 };
+  constexpr TLineCfg t_max = { hw::k_crit_hi, tr::k_4, 0 + shift };
+  constexpr TLineCfg t_4_l = { hw::k_crit_hi, tr::k_4, 0 };
   constexpr TLineCfg t_4_h = { tr::k_4, tr::k_5, rpart };
   constexpr TLineCfg t_5_l = { tr::k_4, tr::k_5, lpart };
   constexpr TLineCfg t_5_h = { tr::k_5, tr::k_6, rpart };
   constexpr TLineCfg t_6_l = { tr::k_5, tr::k_6, lpart };
   constexpr TLineCfg t_6_h = { tr::k_6, tr::k_7, rpart };
   constexpr TLineCfg t_7_l = { tr::k_6, tr::k_7, lpart };
-  constexpr TLineCfg t_7_h = { tr::k_7, hw::k_crit_max, 1 };
-  constexpr TLineCfg t_max = { tr::k_7, hw::k_crit_max, 1 - shift };
+  constexpr TLineCfg t_7_h = { tr::k_7, hw::k_crit_lo, 1 };
+  constexpr TLineCfg t_min = { tr::k_7, hw::k_crit_lo, 1 - shift };
 
   constexpr ArrayView<TLineCfg, 10> t_k_tuples{{
-    t_min,
+    t_max,
     t_4_l,
     t_4_h,
     t_5_l,
@@ -33,7 +33,7 @@ namespace cfg {
     t_6_h,
     t_7_l,
     t_7_h,
-    t_max,
+    t_min,
   }};
 
   constexpr float place(TLineCfg cfg) {
@@ -41,7 +41,7 @@ namespace cfg {
   };
 
   constexpr float get_input_cV(float k_out) {
-    return tr::calc_input_voltage(hw::target_rms_cV, tr::k_in_default, k_out);
+    return tr::calc_input_voltage(hw::OUTPUT_cV_RMS_TARGET, tr::k_in_default, k_out);
   }
 
   // "Границы" диапазонов по коэффициентам отвода
@@ -51,5 +51,5 @@ namespace cfg {
   constexpr ArrayView<float, 10>cV_ranges = t_k_ranges.map<float>(get_input_cV);
 
   // Границы диапазонов в единицах АЦП
-  constexpr ArrayView<uint16_t, 10>adc_ranges = cV_ranges.map<uint16_t>(hw::cV_to_adc);
+  constexpr ArrayView<uint16_t, 10>adc_ranges = cV_ranges.map<uint16_t>(hw::cV_to_adc_fast);
 }

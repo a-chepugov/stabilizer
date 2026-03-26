@@ -6,12 +6,12 @@
 namespace hw {
   // допустимое отклонение +10% / -15%
 
-  constexpr uint16_t target_rms_cV = 220 * 100; // amp 311
-  constexpr uint16_t target_rms_cV_min = target_rms_cV * 0.85; 
-  constexpr uint16_t target_rms_cV_max = target_rms_cV * 1.1;
+  constexpr uint16_t OUTPUT_cV_RMS_TARGET = 220 * 100; // amp 311
+  constexpr uint16_t OUTPUT_cV_RMS_MIN = OUTPUT_cV_RMS_TARGET * 0.85; 
+  constexpr uint16_t OUTPUT_cV_RMS_MAX = OUTPUT_cV_RMS_TARGET * 1.1;
 
-  constexpr uint16_t input_rms_cV_min = tr::calc_input_voltage(target_rms_cV_min, tr::k_in_default, tr::k_7);
-  constexpr uint16_t input_rms_cV_max = tr::calc_input_voltage(target_rms_cV_max, tr::k_in_default, tr::k_4);
+  constexpr uint16_t INPUT_cV_RMS_MIN = tr::calc_input_voltage(OUTPUT_cV_RMS_MIN, tr::k_in_default, tr::k_7);
+  constexpr uint16_t INPUT_cV_RMS_MAX = tr::calc_input_voltage(OUTPUT_cV_RMS_MAX, tr::k_in_default, tr::k_4);
   
   /**
   | # |   k | amp | rms | rms|t |
@@ -22,13 +22,8 @@ namespace hw {
   | 4 |  65 | 382 | 270 |   554 |
   */
 
-  constexpr float get_trans_koef(float V) {
-    return (float)target_rms_cV * tr::k_in_default / V;
-  }
-
-  constexpr float k_crit_min = get_trans_koef(input_rms_cV_max);
-  constexpr float k_crit_max = get_trans_koef(input_rms_cV_min);
-
+  constexpr float k_crit_hi = tr::calc_output_k(INPUT_cV_RMS_MAX, OUTPUT_cV_RMS_TARGET, tr::k_in_default);
+  constexpr float k_crit_lo = tr::calc_output_k(INPUT_cV_RMS_MIN, OUTPUT_cV_RMS_TARGET, tr::k_in_default);
 
   constexpr float test_to_in_factor = tr::k_in_default / tr::test_k;
   constexpr uint16_t i_test_to_in_factor = test_to_in_factor;
@@ -58,8 +53,13 @@ namespace hw {
     ;
   }
 
-  // Пересчёт сантивольтов на входе трансформатора в показания АЦП
-  constexpr uint16_t cV_to_adc(uint16_t cV) {
+  // Пересчёт сантивольтов на выходе трансформатора в показания АЦП
+  constexpr float V_to_adc(float V) {
+    return (V / test_to_in_factor - diode_drop) / divider_factor / adc::VREF * adc::MAX_VALUE;
+  }
+
+  // Пересчёт сантивольтов на выходе трансформатора в показания АЦП
+  constexpr uint16_t cV_to_adc_fast(uint16_t cV) {
     return (
       (uint32_t)(
         cV / i_test_to_in_factor - diode_drop_cV
